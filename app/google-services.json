@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "34331390135",
+    "firebase_url": "https://schoolmark-5d81d.firebaseio.com",
+    "project_id": "schoolmark-5d81d",
+    "storage_bucket": "schoolmark-5d81d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:34331390135:android:5f9e7397be778e434f9d32",
+        "android_client_info": {
+          "package_name": "edu.gatech.schoolmark"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "34331390135-2tk7fp32uobgitapjk5m4ne5evot3a1u.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAfngV1UQ0Q9lArPAq4sJYaLKJyIH7lZ_w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "34331390135-2tk7fp32uobgitapjk5m4ne5evot3a1u.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
