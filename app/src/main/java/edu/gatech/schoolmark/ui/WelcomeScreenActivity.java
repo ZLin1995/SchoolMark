@@ -2,17 +2,15 @@ package edu.gatech.schoolmark.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
-import androidx.annotation.NonNull;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
-import android.util.Log;
 import android.view.View;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-import edu.gatech.schoolmark.MainActivity;
 import edu.gatech.schoolmark.R;
 
 
@@ -38,7 +36,7 @@ public class WelcomeScreenActivity extends AppCompatActivity {
         super.onResume();
         final FirebaseUser user = mAuth.getCurrentUser();
         if (user != null && user.isEmailVerified()) {
-            Intent intent = new Intent(WelcomeScreenActivity.this, MainActivity.class);
+            Intent intent = new Intent(WelcomeScreenActivity.this, HomeScreenActivity.class);
             startActivity(intent);
             finish();
         }

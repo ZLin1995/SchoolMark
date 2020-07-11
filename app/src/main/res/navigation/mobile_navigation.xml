@@ -3,23 +3,23 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/navigation_home">
+    app:startDestination="@+id/navigation_game">
 
     <fragment
-        android:id="@+id/navigation_home"
-        android:name="edu.gatech.schoolmark.ui.home.HomeFragment"
+        android:id="@+id/navigation_game"
+        android:name="edu.gatech.schoolmark.ui.game.GameFragment"
         android:label="@string/title_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_game" />
 
     <fragment
-        android:id="@+id/navigation_dashboard"
-        android:name="edu.gatech.schoolmark.ui.dashboard.DashboardFragment"
+        android:id="@+id/navigation_mygame"
+        android:name="edu.gatech.schoolmark.ui.mygame.MyGameFragment"
         android:label="@string/title_dashboard"
-        tools:layout="@layout/fragment_dashboard" />
+        tools:layout="@layout/fragment_mygame" />
 
     <fragment
-        android:id="@+id/navigation_notifications"
-        android:name="edu.gatech.schoolmark.ui.notifications.NotificationsFragment"
+        android:id="@+id/navigation_profile"
+        android:name="edu.gatech.schoolmark.ui.profile.ProfileFragment"
         android:label="@string/title_notifications"
-        tools:layout="@layout/fragment_notifications" />
+        tools:layout="@layout/fragment_profile" />
 </navigation>

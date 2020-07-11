@@ -16,7 +16,6 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-import edu.gatech.schoolmark.MainActivity;
 import edu.gatech.schoolmark.R;
 
 public class LoginActivity extends AppCompatActivity {
@@ -66,7 +65,7 @@ public class LoginActivity extends AppCompatActivity {
                                 Toast.makeText(LoginActivity.this, "Incorrect Email Address or Password entered!",
                                         Toast.LENGTH_SHORT).show();
                             } else if (user != null && user.isEmailVerified()) {
-                                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                                Intent intent = new Intent(LoginActivity.this, HomeScreenActivity.class);
                                 startActivity(intent);
                                 finish();
                             } else {
