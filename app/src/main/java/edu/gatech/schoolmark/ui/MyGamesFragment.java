@@ -1,6 +1,7 @@
 package edu.gatech.schoolmark.ui;
 
 import android.app.Fragment;
+import android.app.FragmentManager;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,6 +10,7 @@ import android.widget.ListView;
 
 import androidx.annotation.Nullable;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -27,6 +29,8 @@ import java.util.Map;
 public class MyGamesFragment extends Fragment { // AppCompatActivity
     private FirebaseAuth mAuth;
     private DatabaseReference currentRef;
+
+    FloatingActionButton joinEvent;
 
     ListView listViewGame;
     List<Game> gameList;
@@ -50,6 +54,16 @@ public class MyGamesFragment extends Fragment { // AppCompatActivity
         listViewGame = root.findViewById(R.id.listViewGame);
         userUID = mAuth.getCurrentUser().getUid();
         gameList = new ArrayList<>();
+
+        joinEvent = root.findViewById(R.id.createEvent);
+        joinEvent.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Fragment fragment = new HostGameFragment();
+                FragmentManager fm = getFragmentManager();
+                fm.beginTransaction().replace(R.id.home_frame, fragment).commit();
+            }
+        });
 
         return root;
     }

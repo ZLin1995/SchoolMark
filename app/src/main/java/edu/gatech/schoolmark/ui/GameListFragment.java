@@ -11,12 +11,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ExpandableListView;
 import android.widget.ListView;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -67,6 +71,7 @@ public class GameListFragment extends Fragment implements AdapterView.OnItemSele
     Spinner playerSpinner;
     Spinner intensitySpinner;
 
+    FloatingActionButton joinEvent;
 
     List<String> sport;
     List<String> location;
@@ -104,6 +109,16 @@ public class GameListFragment extends Fragment implements AdapterView.OnItemSele
         locationSpinner = root.findViewById(R.id.location_spinner);
         playerSpinner = root.findViewById(R.id.player_spinner);
         intensitySpinner = root.findViewById(R.id.intensity_spinner);
+
+        joinEvent = root.findViewById(R.id.createEvent);
+        joinEvent.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Fragment fragment = new HostGameFragment();
+                FragmentManager fm = getFragmentManager();
+                fm.beginTransaction().replace(R.id.home_frame, fragment).commit();
+            }
+        });
 
         sport = new ArrayList<String>();
         location = new ArrayList<String>();
@@ -335,6 +350,12 @@ public class GameListFragment extends Fragment implements AdapterView.OnItemSele
         plSelected = plSel;
     }
 
+
+    public void createEvent(View view) {
+        Fragment fragment = new HostGameFragment();
+        FragmentManager fm = getFragmentManager();
+        fm.beginTransaction().replace(R.id.home_frame, fragment).commit();
+    }
 
     private boolean fitsFilter(Game g) {
         if ((g.getSport().equals(spSelected) || spSelected.equals(spSel))

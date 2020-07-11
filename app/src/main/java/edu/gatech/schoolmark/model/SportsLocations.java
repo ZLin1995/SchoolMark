@@ -3,11 +3,7 @@ package edu.gatech.schoolmark.model;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by Armando on 9/23/17.
- * A list of locations for a certain type of sport
- * TODO: Add GPS Locations
- */
+
 
 public class SportsLocations {
 

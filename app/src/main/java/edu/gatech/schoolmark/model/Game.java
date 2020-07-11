@@ -4,9 +4,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-/**
- * Created by Altan on 9/24/2017.
- */
+
 
 public class Game {
 
