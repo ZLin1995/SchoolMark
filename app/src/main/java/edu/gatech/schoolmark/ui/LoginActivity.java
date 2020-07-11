@@ -46,6 +46,18 @@ public class LoginActivity extends AppCompatActivity {
         super.onStop();
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        // Get the current user info check if it it's a verified user
+        final FirebaseUser user = mAuth.getCurrentUser();
+        if (user != null && user.isEmailVerified()) {
+            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+            startActivity(intent);
+            finish();
+        }
+    }
+
     public void logInAttempt(View view) {
         EditText emailEdit = (EditText) findViewById(R.id.enterEmailLogin);
         EditText passwordEdit = (EditText) findViewById(R.id.enterPasswordLogin);
@@ -65,7 +77,7 @@ public class LoginActivity extends AppCompatActivity {
                                 Toast.makeText(LoginActivity.this, "Incorrect Email Address or Password entered!",
                                         Toast.LENGTH_SHORT).show();
                             } else if (user != null && user.isEmailVerified()) {
-                                Intent intent = new Intent(LoginActivity.this, HomeScreenActivity.class);
+                                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                                 startActivity(intent);
                                 finish();
                             } else {
@@ -80,8 +92,8 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
-    public void cancelLogIn(View view) {
-        Intent intent = new Intent(this, WelcomeScreenActivity.class);
+    public void register(View view) {
+        Intent intent = new Intent(this, RegisterActivity.class);
         startActivity(intent);
         finish();
     }
@@ -104,13 +116,6 @@ public class LoginActivity extends AppCompatActivity {
                     Toast.makeText(LoginActivity.this,
                             "Verification email sent to " + user.getEmail(),
                             Toast.LENGTH_SHORT).show();
-
-                    /*
-                    Intent intent = new Intent(RegistrationActivity.this, VerifyEmail.class);
-
-                    startActivity(intent);
-                    finish();
-                    */
                 } else {
                     Log.e(TAG, "sendEmailVerification", task.getException());
                     Toast.makeText(LoginActivity.this,

@@ -5,15 +5,20 @@
     android:layout_height="match_parent"
     tools:context="edu.gatech.schoolmark.ui.LoginActivity">
 
+
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/titleWelcome"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="30dp"
-        android:text="Log In"
+        android:layout_marginTop="33dp"
+        android:text="SchoolMark"
+        android:textAlignment="center"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        android:textColor="@android:color/black"
         android:textSize="50sp"
-        android:textStyle="bold" />
+        android:textStyle="bold|italic" />
 
     <EditText
         android:layout_width="wrap_content"
@@ -43,27 +48,26 @@
 
     <Button
         android:id="@+id/loginButton"
-        style="@style/Widget.AppCompat.Button.Colored"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
-        android:background="#ff3f9c"
+        android:background="#8BC34A"
         android:onClick="logInAttempt"
         android:text="Log In"
         android:layout_below="@+id/enterPasswordLogin"
+        android:layout_marginBottom="10dp"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />
 
     <Button
-        android:id="@+id/cancelLogin"
-        style="@style/Widget.AppCompat.Button"
-        android:backgroundTint="@android:color/white"
+        android:id="@+id/registration"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:onClick="cancelLogIn"
-        android:text="Back"
+        android:background="#009688"
+        android:onClick="register"
+        android:text="Register"
         android:layout_below="@+id/loginButton"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
@@ -80,6 +84,6 @@
         android:layout_marginBottom="34dp"
         android:onClick="forgotPassword"
         android:text="Forgot Your Password?"
-        android:textColor="#ff3f9c" />
+        android:textColor="#E91E63" />
 
 </RelativeLayout>

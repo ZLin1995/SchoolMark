@@ -21,7 +21,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import edu.gatech.schoolmark.R;
 
 
-public class HomeScreenActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity {
 
     private DrawerLayout mDrawerLayout;
     private ListView mDrawerList;
@@ -35,7 +35,7 @@ public class HomeScreenActivity extends AppCompatActivity {
 
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         mDrawerList = (ListView) findViewById(R.id.left_drawer);
-        String[] drawerItems = {"Home", "Profile", "My Games", "Host Game", "Join Game", "Contact Us", "Logout"};
+        String[] drawerItems = {"Game List",  "My Games", "Profile", "Contact Us", "Logout"};
 
         mDrawerList.setAdapter(new ArrayAdapter<String>(this, R.layout.drawer_list_item, R.id.text1 ,drawerItems ));
         mDrawerList.setOnItemClickListener(new DrawerItemClickListener());
@@ -60,7 +60,7 @@ public class HomeScreenActivity extends AppCompatActivity {
         };
         mDrawerLayout.addDrawerListener(mDrawerToggle);
 
-        Fragment fragment = new HomeScreenFragment();
+        Fragment fragment = new GameListFragment();
         FragmentManager fragmentManager = getFragmentManager();
         fragmentManager.beginTransaction().replace(R.id.home_frame, fragment).commit();
 
@@ -86,8 +86,8 @@ public class HomeScreenActivity extends AppCompatActivity {
     }
 
     private void selectDrawerItem(String item) {
-        if (item.equals("Home")) {
-            Fragment fragment = new HomeScreenFragment();
+        if (item.equals("Game List")) {
+            Fragment fragment = new GameListFragment();
             FragmentManager fm = getFragmentManager();
             fm.beginTransaction().replace(R.id.home_frame, fragment).commit();
             mDrawerLayout.closeDrawer(mDrawerList);
@@ -98,16 +98,6 @@ public class HomeScreenActivity extends AppCompatActivity {
             mDrawerLayout.closeDrawer(mDrawerList);
         } else if(item.equals("My Games")) {
             Fragment fragment = new MyGamesFragment();
-            FragmentManager fm = getFragmentManager();
-            fm.beginTransaction().replace(R.id.home_frame, fragment).commit();
-            mDrawerLayout.closeDrawer(mDrawerList);
-        } else if (item.equals("Join Game")){
-            Fragment fragment = new JoinGameFragment();
-            FragmentManager fm = getFragmentManager();
-            fm.beginTransaction().replace(R.id.home_frame, fragment).commit();
-            mDrawerLayout.closeDrawer(mDrawerList);
-        } else if (item.equals("Host Game")) {
-            Fragment fragment = new HostGameFragment();
             FragmentManager fm = getFragmentManager();
             fm.beginTransaction().replace(R.id.home_frame, fragment).commit();
             mDrawerLayout.closeDrawer(mDrawerList);

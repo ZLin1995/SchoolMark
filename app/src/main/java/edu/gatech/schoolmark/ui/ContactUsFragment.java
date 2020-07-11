@@ -17,10 +17,6 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import edu.gatech.schoolmark.R;
 
-/**
- * Created by Altan on 11/20/2017.
- */
-
 public class ContactUsFragment extends Fragment implements View.OnClickListener {
 
     private FirebaseAuth mAuth;
@@ -48,7 +44,7 @@ public class ContactUsFragment extends Fragment implements View.OnClickListener 
 
         Toast.makeText(getActivity(), "Thanks for the feedback!",
                 Toast.LENGTH_SHORT).show();
-        Fragment fragment = new HomeScreenFragment();
+        Fragment fragment = new GameListFragment();
         FragmentManager fm = getFragmentManager();
         fm.beginTransaction().replace(R.id.home_frame, fragment).commit();
     }

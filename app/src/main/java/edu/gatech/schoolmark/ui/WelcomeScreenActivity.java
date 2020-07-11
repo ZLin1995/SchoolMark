@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
 
 import android.view.View;
 
@@ -17,16 +16,11 @@ import edu.gatech.schoolmark.R;
 public class WelcomeScreenActivity extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
-    private FirebaseAuth.AuthStateListener mAuthListener;
-    private static final String TAG = "EmailPassword";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_welcome_screen);
-
-        int requested = 0;
-        ActivityCompat.requestPermissions(this, new String[]{android.Manifest.permission.ACCESS_COARSE_LOCATION, android.Manifest.permission.ACCESS_FINE_LOCATION}, requested);
 
         mAuth = FirebaseAuth.getInstance();
     }
@@ -34,22 +28,23 @@ public class WelcomeScreenActivity extends AppCompatActivity {
     @Override
     public void onResume() {
         super.onResume();
+        // Get the current user info check if it it's a verified user
         final FirebaseUser user = mAuth.getCurrentUser();
         if (user != null && user.isEmailVerified()) {
-            Intent intent = new Intent(WelcomeScreenActivity.this, HomeScreenActivity.class);
+            Intent intent = new Intent(WelcomeScreenActivity.this, MainActivity.class);
             startActivity(intent);
             finish();
         }
     }
 
-    public void pressLogInWelcome(View view) {
+    public void logIn(View view) {
         Intent intent = new Intent(this, LoginActivity.class);
         startActivity(intent);
         finish();
     }
 
-    public void pressRegisterWelcome(View view) {
-        Intent intent = new Intent(this, RegistrationActivity.class);
+    public void register(View view) {
+        Intent intent = new Intent(this, RegisterActivity.class);
         startActivity(intent);
         finish();
     }

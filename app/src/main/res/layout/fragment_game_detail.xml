@@ -85,9 +85,4 @@
             android:textSize="18sp" />
     </RelativeLayout>
 
-    <com.google.android.gms.maps.MapView
-        android:id="@+id/mapView2"
-        android:layout_width="match_parent"
-        android:layout_height="299dp" />
-
 </LinearLayout>

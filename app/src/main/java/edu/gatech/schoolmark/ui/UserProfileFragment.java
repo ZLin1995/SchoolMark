@@ -28,8 +28,6 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import edu.gatech.schoolmark.R;
-import edu.gatech.schoolmark.model.Game;
-import edu.gatech.schoolmark.model.SportsLocations;
 import edu.gatech.schoolmark.model.User;
 
 /**
@@ -154,7 +152,7 @@ public class UserProfileFragment extends Fragment implements View.OnClickListene
 
             Toast.makeText(getActivity(), "Your changes have been saved!",
                     Toast.LENGTH_SHORT).show();
-            Fragment fragment = new HomeScreenFragment();
+            Fragment fragment = new GameListFragment();
             FragmentManager fm = getFragmentManager();
             fm.beginTransaction().replace(R.id.home_frame, fragment).commit();
         }
@@ -164,7 +162,7 @@ public class UserProfileFragment extends Fragment implements View.OnClickListene
     public void profileOnBack(View view) {
         Toast.makeText(getActivity(), "You exited without saving your changes.",
                 Toast.LENGTH_SHORT).show();
-        Fragment fragment = new HomeScreenFragment();
+        Fragment fragment = new GameListFragment();
         FragmentManager fm = getFragmentManager();
         fm.beginTransaction().replace(R.id.home_frame, fragment).commit();
 

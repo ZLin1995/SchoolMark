@@ -27,7 +27,7 @@ import edu.gatech.schoolmark.model.Game;
 import edu.gatech.schoolmark.model.SportsLocations;
 import edu.gatech.schoolmark.model.User;
 
-public class JoinGameListAdapter extends ArrayAdapter<Game> {
+public class GameListAdapter extends ArrayAdapter<Game> {
     static java.util.Calendar cal = java.util.Calendar.getInstance();
     private Activity context;
     private FirebaseAuth mAuth;
@@ -38,7 +38,7 @@ public class JoinGameListAdapter extends ArrayAdapter<Game> {
 
 
 
-     public JoinGameListAdapter(Activity context, List<Game> gameList, DataSnapshot gamesList) {
+     public GameListAdapter(Activity context, List<Game> gameList, DataSnapshot gamesList) {
         super(context, R.layout.join_game_list_layout, gameList);
         this.context = context;
         this.gameList = gameList;
@@ -84,8 +84,6 @@ public class JoinGameListAdapter extends ArrayAdapter<Game> {
             if (g == null) { break; }
             if (g.equals(game)) {
                 gameKey = gameSnapshot.getKey();
-                //Log.i("JOIN - JoinGameListAdapter", "the games were equal");
-
             }
         }
 

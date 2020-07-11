@@ -34,7 +34,7 @@ import edu.gatech.schoolmark.model.SportsLocations;
 import edu.gatech.schoolmark.model.User;
 
 
-public class JoinGameFragment extends Fragment implements AdapterView.OnItemSelectedListener {
+public class GameListFragment extends Fragment implements AdapterView.OnItemSelectedListener {
     private FirebaseAuth mAuth;
     private DatabaseReference currentRef;
     private DatabaseReference mDatabase;
@@ -84,7 +84,7 @@ public class JoinGameFragment extends Fragment implements AdapterView.OnItemSele
 
     private View root;
 
-    public JoinGameFragment() {
+    public GameListFragment() {
         //required empty constructor
     }
 
@@ -180,7 +180,7 @@ public class JoinGameFragment extends Fragment implements AdapterView.OnItemSele
 
         } catch (NullPointerException ex) {
             Log.e(TAG, "database reference retrieved was null");
-            Fragment fragment = new HomeScreenFragment();
+            Fragment fragment = new GameListFragment();
             FragmentManager fm = getFragmentManager();
             fm.beginTransaction().replace(R.id.home_frame, fragment).commit();
         }
@@ -238,7 +238,7 @@ public class JoinGameFragment extends Fragment implements AdapterView.OnItemSele
 
                 }
                 if (getActivity()!=null) {
-                    JoinGameListAdapter adapter = new JoinGameListAdapter(getActivity(), gameList, dataSnapshot);
+                    GameListAdapter adapter = new GameListAdapter(getActivity(), gameList, dataSnapshot);
                     listViewGame.setAdapter(adapter);
                 }
                 isGameListEmpty();
@@ -284,7 +284,7 @@ public class JoinGameFragment extends Fragment implements AdapterView.OnItemSele
     }
 
     private void homeScreen() {
-        Fragment fragment = new HomeScreenFragment();
+        Fragment fragment = new GameListFragment();
         FragmentManager fm = getFragmentManager();
         fm.beginTransaction().replace(R.id.home_frame, fragment).commit();
     }

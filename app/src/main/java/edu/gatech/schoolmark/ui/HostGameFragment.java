@@ -110,54 +110,6 @@ public class HostGameFragment extends Fragment implements AdapterView.OnItemSele
         numberOfPlayers.setMinValue(0);
         numberOfPlayers.setMaxValue(30);
 
-        /*
-        sportsList.add("Basketball");
-        sportsList.add("Football");
-        sportsList.add("Soccer");
-        sportsList.add("Volleyball");
-        sportsList.add("Ultimate Frisbee");
-        sportsList.add("Tennis");
-        // =========================== Pranshav Help
-        List<String> lBasketball = new ArrayList<>();
-        List<String> lFootball = new ArrayList<>();
-        List<String> lSoccer = new ArrayList<>();
-        List<String> lVolleyball = new ArrayList<>();
-        List<String> lFrisbee = new ArrayList<>();
-        List<String> lTennis = new ArrayList<>();
-
-        lBasketball.add("CRC 4th floor Courts");
-        lBasketball.add("North Avenue Gym");
-        lBasketball.add("Peters Parking Deck");
-
-        lFootball.add("CRC Fields");
-        lFootball.add("Burger Bowl");
-        lFootball.add("Tech Green");
-
-        lSoccer.add("CRC Fields");
-        lSoccer.add("Burger Bowl");
-
-        lVolleyball.add("North Ave Courtyard");
-        lVolleyball.add("CRC Fields");
-
-        lFrisbee.add("CRC Fields");
-        lFrisbee.add("Tech Green");
-
-        lTennis.add("Peters Parking Deck");
-
-        sportsLocationsList.add(new SportsLocations("Basketball", lBasketball));
-        sportsLocationsList.add(new SportsLocations("Football", lFootball));
-        sportsLocationsList.add(new SportsLocations("Soccer", lSoccer));
-        sportsLocationsList.add(new SportsLocations("Volleyball", lVolleyball));
-        sportsLocationsList.add(new SportsLocations("Ultimate Frisbee", lFrisbee));
-        sportsLocationsList.add(new SportsLocations("Tennis", lTennis));
-        // =========================== Please contact me at 867-5309
-        */
-
-        // Populate the sports and location spinners from the database
-        // Create a database reference to the gameList folder
-
-        // Get Sports List and Locations List from the Database
-
         try {
             currentRef = mDatabase.child(sportsListURL);
             currentRef.addValueEventListener(new ValueEventListener() {
@@ -208,7 +160,7 @@ public class HostGameFragment extends Fragment implements AdapterView.OnItemSele
 
         } catch (NullPointerException ex) {
             Log.e(TAG, "database reference retrieved was null");
-            Fragment fragment = new HomeScreenFragment();
+            Fragment fragment = new GameListFragment();
             FragmentManager fm = getFragmentManager();
             fm.beginTransaction().replace(R.id.home_frame, fragment).commit();
         }
@@ -298,13 +250,13 @@ public class HostGameFragment extends Fragment implements AdapterView.OnItemSele
                 "Your game was hosted!",
                 Toast.LENGTH_SHORT).show();
 
-        Fragment fragment = new HomeScreenFragment();
+        Fragment fragment = new GameListFragment();
         FragmentManager fm = getFragmentManager();
         fm.beginTransaction().replace(R.id.home_frame, fragment).commit();
     }
 
     public void cancelGame(View view) {
-        Fragment fragment = new HomeScreenFragment();
+        Fragment fragment = new GameListFragment();
         FragmentManager fm = getFragmentManager();
         fm.beginTransaction().replace(R.id.home_frame, fragment).commit();
     }
@@ -455,72 +407,6 @@ public class HostGameFragment extends Fragment implements AdapterView.OnItemSele
     public void showDatePicker(View v) {
         DialogFragment fragment = new DatePickerFragment();
         fragment.show(getFragmentManager(), "datePicker");
-    }
-
-
-
-
-
-    /**
-     * Super secret developer code used to populate the database for the first time
-     * Don't call this unless there needs to be changes to the sports / sports location
-     * in the database
-     */
-    public void populateDatabase() {
-            List<String> listOfLocations = new ArrayList<>();
-             SportsLocations test;
-
-            //currentRef = mDatabase.child("sportsList");
-            currentRef = mDatabase.child("sportsList/");
-
-
-            listOfLocations.add("CRC 4th floor Courts");
-            listOfLocations.add("North Avenue Gym");
-            listOfLocations.add("Peters Parking Deck");
-            test = new SportsLocations("Basketball", listOfLocations);
-            //currentRef.setValue(test);
-            currentRef.push().setValue(test);
-
-            // ===========
-
-
-            listOfLocations = new ArrayList<>();
-            listOfLocations.add("CRC Fields");
-            listOfLocations.add("Burger Bowl");
-            listOfLocations.add("Tech Green");
-            test = new SportsLocations("Football", listOfLocations);
-             currentRef.push().setValue(test);
-            // ===========
-
-
-            listOfLocations = new ArrayList<>();
-            listOfLocations.add("CRC Fields");
-            listOfLocations.add("Burger Bowl");
-            test = new SportsLocations("Soccer", listOfLocations);
-        currentRef.push().setValue(test);
-            // ===========
-
-
-            listOfLocations = new ArrayList<>();
-            listOfLocations.add("North Ave Courtyard");
-            listOfLocations.add("CRC Fields");
-            test = new SportsLocations("Volleyball", listOfLocations);
-        currentRef.push().setValue(test);
-            // ===========
-
-
-            listOfLocations = new ArrayList<>();
-            listOfLocations.add("CRC Fields");
-            listOfLocations.add("Tech Green");
-            test = new SportsLocations("UltimateFrisbee", listOfLocations);
-        currentRef.push().setValue(test);
-            // ===========
-
-
-            listOfLocations = new ArrayList<>();
-            listOfLocations.add("Peters Parking Deck");
-            test = new SportsLocations("Tennis", listOfLocations);
-        currentRef.push().setValue(test);
     }
 
 }

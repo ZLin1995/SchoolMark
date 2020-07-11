@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".ui.WelcomeScreenActivity"
+            android:name=".ui.LoginActivity"
             android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -21,11 +21,9 @@
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyAfngV1UQ0Q9lArPAq4sJYaLKJyIH7lZ_w" />
-        <activity android:name=".ui.LoginActivity" />
-        <activity android:name=".ui.RegistrationActivity" />
+        <activity android:name=".ui.RegisterActivity" />
         <activity android:name=".ui.ForgotPasswordActivity" />
-        <activity android:name=".ui.HomeScreenActivity" />
-        <activity android:name=".MainActivity" />
+        <activity android:name=".ui.MainActivity" />
     </application>
 
 </manifest>

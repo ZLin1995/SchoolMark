@@ -19,7 +19,7 @@ import com.google.firebase.auth.FirebaseUser;
 
 import edu.gatech.schoolmark.R;
 
-public class RegistrationActivity extends AppCompatActivity {
+public class RegisterActivity extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
@@ -28,7 +28,7 @@ public class RegistrationActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_registration);
+        setContentView(R.layout.activity_register);
         mAuth = FirebaseAuth.getInstance();
 
         // Append @gatech.edu to registration email
@@ -74,9 +74,9 @@ public class RegistrationActivity extends AppCompatActivity {
                                 sendEmail();
                             } else {
                                 if (task.getException() instanceof FirebaseAuthUserCollisionException) {
-                                    Toast.makeText(RegistrationActivity.this, "This email account is already registered!", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(RegisterActivity.this, "This email account is already registered!", Toast.LENGTH_SHORT).show();
                                 }
-                                Toast.makeText(RegistrationActivity.this, "Firebase Authentification failed"
+                                Toast.makeText(RegisterActivity.this, "Firebase Authentification failed"
                                         , Toast.LENGTH_SHORT).show();
                             }
 
@@ -101,13 +101,13 @@ public class RegistrationActivity extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task task) {
                 if (task.isSuccessful()) {
-                    Toast.makeText(RegistrationActivity.this,
+                    Toast.makeText(RegisterActivity.this,
                             "Verification email sent to " + user.getEmail(),
                             Toast.LENGTH_SHORT).show();
 
                 } else {
                     Log.e(TAG, "sendEmailVerification", task.getException());
-                    Toast.makeText(RegistrationActivity.this,
+                    Toast.makeText(RegisterActivity.this,
                             "Failed to send verification email",
                             Toast.LENGTH_SHORT).show();
                 }
@@ -118,7 +118,7 @@ public class RegistrationActivity extends AppCompatActivity {
     public void onBackPressed()
     {
         super.onBackPressed();
-        startActivity(new Intent(RegistrationActivity.this, WelcomeScreenActivity.class));
+        startActivity(new Intent(RegisterActivity.this, WelcomeScreenActivity.class));
         finish();
 
     }
