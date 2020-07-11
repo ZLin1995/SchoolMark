@@ -179,7 +179,7 @@ public class UserProfileFragment extends Fragment implements View.OnClickListene
                 .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                         deleting();
-                        Intent intent = new Intent(getActivity(), WelcomeScreenActivity.class);
+                        Intent intent = new Intent(getActivity(), LoginActivity.class);
                         startActivity(intent);
 
                     }

@@ -86,7 +86,7 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     public void cancelRegister(View view) {
-        Intent intent = new Intent(this, WelcomeScreenActivity.class);
+        Intent intent = new Intent(this, LoginActivity.class);
         startActivity(intent);
         finish();
     }
@@ -118,7 +118,7 @@ public class RegisterActivity extends AppCompatActivity {
     public void onBackPressed()
     {
         super.onBackPressed();
-        startActivity(new Intent(RegisterActivity.this, WelcomeScreenActivity.class));
+        startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
         finish();
 
     }

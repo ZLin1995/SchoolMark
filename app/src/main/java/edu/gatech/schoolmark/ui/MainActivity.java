@@ -108,7 +108,7 @@ public class MainActivity extends AppCompatActivity {
             mDrawerLayout.closeDrawer(mDrawerList);
         } else if (item.equals("Logout")) {
             FirebaseAuth.getInstance().signOut();
-            Intent intent = new Intent(this, WelcomeScreenActivity.class);
+            Intent intent = new Intent(this, LoginActivity.class);
             startActivity(intent);
             finish();
         }
