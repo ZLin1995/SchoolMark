@@ -38,13 +38,13 @@ public class GameDetailFragment extends Fragment implements  LocationListener{
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         root = inflater.inflate(R.layout.fragment_game_detail, container, false);
 
-        TextView listSport = (TextView) root.findViewById(R.id.detailSport);
-        TextView listLocation = (TextView) root.findViewById(R.id.detailLocation);
-        TextView listTime = (TextView) root.findViewById(R.id.detailTime);
-        TextView listDate = (TextView) root.findViewById(R.id.detailDate);
-        RatingBar listIntensityBar = (RatingBar) root.findViewById(R.id.listIntensityBar);
-        final TextView hostName = (TextView) root.findViewById(R.id.detailHost);
-        final TextView hostNumber = (TextView) root.findViewById(R.id.detailHostNum);
+        TextView listSport = root.findViewById(R.id.detailSport);
+        TextView listLocation = root.findViewById(R.id.detailLocation);
+        TextView listTime = root.findViewById(R.id.detailTime);
+        TextView listDate = root.findViewById(R.id.detailDate);
+        RatingBar listIntensityBar = root.findViewById(R.id.listIntensityBar);
+        final TextView hostName = root.findViewById(R.id.detailHost);
+        final TextView hostNumber = root.findViewById(R.id.detailHostNum);
 
         mAuth = FirebaseAuth.getInstance();
         mDatabase = FirebaseDatabase.getInstance().getReference();

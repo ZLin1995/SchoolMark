@@ -48,9 +48,9 @@ public class RegisterActivity extends AppCompatActivity {
 
 
     public void registerAttempt(View view) {
-        EditText nameEdit = (EditText) findViewById(R.id.enterNameRegister);
-        EditText emailEdit = (EditText) findViewById(R.id.enterEmailRegister);
-        EditText passwordEdit = (EditText) findViewById(R.id.enterPasswordRegister);
+        EditText nameEdit = findViewById(R.id.enterNameRegister);
+        EditText emailEdit = findViewById(R.id.enterEmailRegister);
+        EditText passwordEdit = findViewById(R.id.enterPasswordRegister);
 
         String name = nameEdit.getText().toString();
         String email = emailEdit.getText().toString();

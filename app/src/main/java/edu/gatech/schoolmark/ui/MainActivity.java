@@ -33,8 +33,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_screen);
 
-        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-        mDrawerList = (ListView) findViewById(R.id.left_drawer);
+        mDrawerLayout = findViewById(R.id.drawer_layout);
+        mDrawerList = findViewById(R.id.left_drawer);
         String[] drawerItems = {"Game List",  "My Games", "Profile", "Contact Us", "Logout"};
 
         mDrawerList.setAdapter(new ArrayAdapter<String>(this, R.layout.drawer_list_item, R.id.text1 ,drawerItems ));
@@ -79,7 +79,7 @@ public class MainActivity extends AppCompatActivity {
     private class DrawerItemClickListener implements ListView.OnItemClickListener {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-            TextView textView = (TextView) view.findViewById(R.id.text1);
+            TextView textView = view.findViewById(R.id.text1);
             String text = textView.getText().toString();
             selectDrawerItem(text);
         }

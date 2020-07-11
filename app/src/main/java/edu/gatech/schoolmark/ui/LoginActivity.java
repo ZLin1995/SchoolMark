@@ -59,8 +59,8 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void logInAttempt(View view) {
-        EditText emailEdit = (EditText) findViewById(R.id.enterEmailLogin);
-        EditText passwordEdit = (EditText) findViewById(R.id.enterPasswordLogin);
+        EditText emailEdit = findViewById(R.id.enterEmailLogin);
+        EditText passwordEdit = findViewById(R.id.enterPasswordLogin);
         String email = emailEdit.getText().toString();
         String password = passwordEdit.getText().toString();
         if (email.matches("") || password.matches("")) {

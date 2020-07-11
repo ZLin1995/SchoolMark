@@ -96,14 +96,14 @@ public class GameListFragment extends Fragment implements AdapterView.OnItemSele
         mAuth = FirebaseAuth.getInstance();
         mDatabase = FirebaseDatabase.getInstance().getReference();
         currentRef = FirebaseDatabase.getInstance().getReference(gamesListURL);
-        listViewGame = (ListView) root.findViewById(R.id.listViewGame);
+        listViewGame = root.findViewById(R.id.listViewGame);
         userUID = mAuth.getCurrentUser().getUid();
         gameList = new ArrayList<>();
 
-        sportSpinner = (Spinner) root.findViewById(R.id.sport_spinner);
-        locationSpinner = (Spinner) root.findViewById(R.id.location_spinner);
-        playerSpinner = (Spinner) root.findViewById(R.id.player_spinner);
-        intensitySpinner = (Spinner) root.findViewById(R.id.intensity_spinner);
+        sportSpinner = root.findViewById(R.id.sport_spinner);
+        locationSpinner = root.findViewById(R.id.location_spinner);
+        playerSpinner = root.findViewById(R.id.player_spinner);
+        intensitySpinner = root.findViewById(R.id.intensity_spinner);
 
         sport = new ArrayList<String>();
         location = new ArrayList<String>();

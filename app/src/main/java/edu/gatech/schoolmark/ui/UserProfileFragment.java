@@ -49,9 +49,9 @@ public class UserProfileFragment extends Fragment implements View.OnClickListene
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         root = inflater.inflate(R.layout.fragment_user_profile, container, false);
 
-        Button delete = (Button) root.findViewById(R.id.accountDelete);
-        Button save = (Button) root.findViewById(R.id.userProfileSaveButton);
-        Button profileBack = (Button) root.findViewById(R.id.profileBackButton);
+        Button delete = root.findViewById(R.id.accountDelete);
+        Button save = root.findViewById(R.id.userProfileSaveButton);
+        Button profileBack = root.findViewById(R.id.profileBackButton);
         delete.setOnClickListener(this);
         save.setOnClickListener(this);
         profileBack.setOnClickListener(this);
@@ -66,11 +66,11 @@ public class UserProfileFragment extends Fragment implements View.OnClickListene
             public void onDataChange(DataSnapshot dataSnapshot) {
                 User currentUser = dataSnapshot.getValue(User.class);
 
-                EditText displayNameTextBox = (EditText) root.findViewById(R.id.userProfileDisplayName);
-                EditText phoneNumberTextBox = (EditText) root.findViewById(R.id.userProfilePhoneNumber);
-                EditText ageTextBox = (EditText) root.findViewById(R.id.userProfileAge);
-                RadioGroup selectGenderGroup = (RadioGroup) root.findViewById(R.id.userProfileGender);
-                RadioGroup selectAffiliationGroup = (RadioGroup) root.findViewById(R.id.userProfileAffiliation);
+                EditText displayNameTextBox = root.findViewById(R.id.userProfileDisplayName);
+                EditText phoneNumberTextBox = root.findViewById(R.id.userProfilePhoneNumber);
+                EditText ageTextBox = root.findViewById(R.id.userProfileAge);
+                RadioGroup selectGenderGroup = root.findViewById(R.id.userProfileGender);
+                RadioGroup selectAffiliationGroup = root.findViewById(R.id.userProfileAffiliation);
 
                 if (currentUser != null) {
                     displayNameTextBox.setText(currentUser.getDisplayName());
@@ -117,11 +117,11 @@ public class UserProfileFragment extends Fragment implements View.OnClickListene
 
     public void saveUserProfile(View view) {
 
-        EditText displayNameTextBox = (EditText) root.findViewById(R.id.userProfileDisplayName);
-        EditText phoneNumberTextBox = (EditText) root.findViewById(R.id.userProfilePhoneNumber);
-        EditText ageTextBox = (EditText) root.findViewById(R.id.userProfileAge);
-        RadioGroup selectGenderGroup = (RadioGroup) root.findViewById(R.id.userProfileGender);
-        RadioGroup selectAffiliationGroup = (RadioGroup) root.findViewById(R.id.userProfileAffiliation);
+        EditText displayNameTextBox = root.findViewById(R.id.userProfileDisplayName);
+        EditText phoneNumberTextBox = root.findViewById(R.id.userProfilePhoneNumber);
+        EditText ageTextBox = root.findViewById(R.id.userProfileAge);
+        RadioGroup selectGenderGroup = root.findViewById(R.id.userProfileGender);
+        RadioGroup selectAffiliationGroup = root.findViewById(R.id.userProfileAffiliation);
 
         if(displayNameTextBox.getText().toString().length() > 15) {
             Toast.makeText(getActivity(), "You can only have up to 15 characters in your name :(",

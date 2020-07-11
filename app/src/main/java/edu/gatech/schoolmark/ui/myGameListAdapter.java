@@ -51,13 +51,13 @@ public class myGameListAdapter extends ArrayAdapter<Game> {
         mAuth = FirebaseAuth.getInstance();
         LayoutInflater inflater = context.getLayoutInflater();
         View listViewItem = inflater.inflate(R.layout.my_games_list_layout, null, true);
-        TextView listSport = (TextView) listViewItem.findViewById(R.id.listSport);
-        TextView listLocation = (TextView) listViewItem.findViewById(R.id.listLocation);
-        TextView listTime = (TextView) listViewItem.findViewById(R.id.listTime);
-        TextView listDate = (TextView) listViewItem.findViewById(R.id.listDate);
-        TextView listCapacity = (TextView) listViewItem.findViewById(R.id.listCapacity);
-        RatingBar listIntensityBar = (RatingBar) listViewItem.findViewById(R.id.listIntensityBar);
-        Button quitGame = (Button) listViewItem.findViewById(R.id.quitGame);
+        TextView listSport = listViewItem.findViewById(R.id.listSport);
+        TextView listLocation = listViewItem.findViewById(R.id.listLocation);
+        TextView listTime = listViewItem.findViewById(R.id.listTime);
+        TextView listDate = listViewItem.findViewById(R.id.listDate);
+        TextView listCapacity = listViewItem.findViewById(R.id.listCapacity);
+        RatingBar listIntensityBar = listViewItem.findViewById(R.id.listIntensityBar);
+        Button quitGame = listViewItem.findViewById(R.id.quitGame);
 
         final java.text.DateFormat dateFormat = android.text.format.DateFormat.getDateFormat(getContext());
         final java.text.DateFormat timeFormat = android.text.format.DateFormat.getTimeFormat(getContext());

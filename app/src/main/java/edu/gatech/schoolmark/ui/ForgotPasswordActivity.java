@@ -27,7 +27,7 @@ public class ForgotPasswordActivity extends AppCompatActivity {
     }
 
     public void resetEmail(View view) {
-        EditText emailEdit = (EditText) findViewById(R.id.enterEmailAddress);
+        EditText emailEdit = findViewById(R.id.enterEmailAddress);
         String email = emailEdit.getText().toString();
 
         if (email.matches("") || !(email.substring(email.lastIndexOf('@') + 1).equals("gatech.edu"))) {

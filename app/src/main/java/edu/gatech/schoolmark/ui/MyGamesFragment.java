@@ -47,7 +47,7 @@ public class MyGamesFragment extends Fragment { // AppCompatActivity
 
         mAuth = FirebaseAuth.getInstance();
         currentRef = FirebaseDatabase.getInstance().getReference("gamesList");
-        listViewGame = (ListView) root.findViewById(R.id.listViewGame);
+        listViewGame = root.findViewById(R.id.listViewGame);
         userUID = mAuth.getCurrentUser().getUid();
         gameList = new ArrayList<>();
 

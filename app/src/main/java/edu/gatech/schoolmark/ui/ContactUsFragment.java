@@ -26,7 +26,7 @@ public class ContactUsFragment extends Fragment implements View.OnClickListener 
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         root = inflater.inflate(R.layout.fragment_contact_us, container, false);
 
-        Button submitButton = (Button) root.findViewById(R.id.button_submitFeedback);
+        Button submitButton = root.findViewById(R.id.button_submitFeedback);
         submitButton.setOnClickListener(this);
 
         mAuth = FirebaseAuth.getInstance();

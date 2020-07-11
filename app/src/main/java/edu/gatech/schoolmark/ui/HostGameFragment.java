@@ -85,11 +85,11 @@ public class HostGameFragment extends Fragment implements AdapterView.OnItemSele
         mAuth = FirebaseAuth.getInstance();
         mDatabase = FirebaseDatabase.getInstance().getReference();
 
-        Button datePickerButton = (Button) root.findViewById(R.id.datePickButton);
-        Button timePickerButton = (Button) root.findViewById(R.id.timePickButton);
-        Button hostButton = (Button) root.findViewById(R.id.hostGameButton);
-        Button hostBackButton = (Button) root.findViewById(R.id.hostGameBackButton);
-        Button helpButton = (Button) root.findViewById(R.id.helpButton);
+        Button datePickerButton = root.findViewById(R.id.datePickButton);
+        Button timePickerButton = root.findViewById(R.id.timePickButton);
+        Button hostButton = root.findViewById(R.id.hostGameButton);
+        Button hostBackButton = root.findViewById(R.id.hostGameBackButton);
+        Button helpButton =  root.findViewById(R.id.helpButton);
 
         datePickerButton.setOnClickListener(this);
         timePickerButton.setOnClickListener(this);
@@ -103,10 +103,10 @@ public class HostGameFragment extends Fragment implements AdapterView.OnItemSele
         sportsLocationsList = new ArrayList<>();
         sportsList = new ArrayList<>();
         playersList = new ArrayList<>();
-        locationSpinner = (Spinner) root.findViewById(R.id.locationSpinner);
-        intensity = (RatingBar) root.findViewById(R.id.intensityBar);
-        numberOfPlayers = (NumberPicker) root.findViewById(R.id.numberOfPlayers);
-        checkBox = (CheckBox) root.findViewById(R.id.checkBox);
+        locationSpinner = root.findViewById(R.id.locationSpinner);
+        intensity = root.findViewById(R.id.intensityBar);
+        numberOfPlayers = root.findViewById(R.id.numberOfPlayers);
+        checkBox = root.findViewById(R.id.checkBox);
         numberOfPlayers.setMinValue(0);
         numberOfPlayers.setMaxValue(30);
 
@@ -202,7 +202,7 @@ public class HostGameFragment extends Fragment implements AdapterView.OnItemSele
         // Log.i(TAG, "Current Size of sportsLocationList: " + sportsLocationsList.size());
         // Log.i(TAG, "Current Size of sportsList: " + sportsList.size());
         // Populate the Sports dropdown with the Sports pulled from the database
-        sportSpinner = (Spinner) root.findViewById(R.id.sportSpinner);
+        sportSpinner = root.findViewById(R.id.sportSpinner);
         ArrayAdapter<String> sportsAdapter = new ArrayAdapter<>(
                 getActivity(), android.R.layout.simple_spinner_item, sportsList);
         sportsAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
