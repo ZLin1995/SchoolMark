@@ -1,13 +1,11 @@
 package edu.gatech.schoolmark.ui;
 
-import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.TimePickerDialog;
-import android.content.DialogInterface;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -19,8 +17,6 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.NumberPicker;
-import android.widget.RatingBar;
 import android.widget.Spinner;
 import android.widget.TimePicker;
 import android.widget.Toast;
@@ -44,7 +40,7 @@ import edu.gatech.schoolmark.model.Game;
 import edu.gatech.schoolmark.model.SportsLocations;
 import edu.gatech.schoolmark.model.User;
 
-public class HostGameFragment extends Fragment implements AdapterView.OnItemSelectedListener, View.OnClickListener {
+public class HostEventFragment extends Fragment implements AdapterView.OnItemSelectedListener, View.OnClickListener {
 
     private FirebaseAuth mAuth;
     private DatabaseReference mDatabase;
@@ -74,14 +70,14 @@ public class HostGameFragment extends Fragment implements AdapterView.OnItemSele
 
     private View root;
 
-    public HostGameFragment() {
+    public HostEventFragment() {
         //required empty constructor
     }
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
-        root = inflater.inflate(R.layout.fragment_host_game, container, false);
+        root = inflater.inflate(R.layout.fragment_host_event, container, false);
 
         mAuth = FirebaseAuth.getInstance();
         mDatabase = FirebaseDatabase.getInstance().getReference();
@@ -157,7 +153,7 @@ public class HostGameFragment extends Fragment implements AdapterView.OnItemSele
 
         } catch (NullPointerException ex) {
             Log.e(TAG, "database reference retrieved was null");
-            Fragment fragment = new GameListFragment();
+            Fragment fragment = new EventListFragment();
             FragmentManager fm = getFragmentManager();
             fm.beginTransaction().replace(R.id.home_frame, fragment).commit();
         }
@@ -230,13 +226,13 @@ public class HostGameFragment extends Fragment implements AdapterView.OnItemSele
                 "Your game was hosted!",
                 Toast.LENGTH_SHORT).show();
 
-        Fragment fragment = new GameListFragment();
+        Fragment fragment = new EventListFragment();
         FragmentManager fm = getFragmentManager();
         fm.beginTransaction().replace(R.id.home_frame, fragment).commit();
     }
 
     public void cancelGame(View view) {
-        Fragment fragment = new GameListFragment();
+        Fragment fragment = new EventListFragment();
         FragmentManager fm = getFragmentManager();
         fm.beginTransaction().replace(R.id.home_frame, fragment).commit();
     }

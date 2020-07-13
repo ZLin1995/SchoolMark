@@ -6,7 +6,7 @@
     android:paddingLeft="10dp"
     android:paddingRight="10dp"
     android:paddingTop="10dp"
-    tools:context="edu.gatech.schoolmark.ui.GameDetailFragment">
+    tools:context="edu.gatech.schoolmark.ui.EventDetailFragment">
 
     <TextView
         android:id="@+id/detailSport"

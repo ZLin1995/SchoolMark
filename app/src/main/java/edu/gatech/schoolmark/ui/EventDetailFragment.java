@@ -4,15 +4,12 @@ import android.app.Activity;
 import android.app.Fragment;
 import android.location.Location;
 import android.location.LocationListener;
-import android.location.LocationManager;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.RatingBar;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -26,9 +23,7 @@ import java.util.HashMap;
 
 import edu.gatech.schoolmark.R;
 
-import static android.content.Context.LOCATION_SERVICE;
-
-public class GameDetailFragment extends Fragment implements  LocationListener{
+public class EventDetailFragment extends Fragment implements  LocationListener{
     private Activity context;
     private FirebaseAuth mAuth;
     private DatabaseReference mDatabase;
@@ -36,7 +31,7 @@ public class GameDetailFragment extends Fragment implements  LocationListener{
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
-        root = inflater.inflate(R.layout.fragment_game_detail, container, false);
+        root = inflater.inflate(R.layout.fragment_event_detail, container, false);
 
         TextView listSport = root.findViewById(R.id.detailSport);
         TextView listLocation = root.findViewById(R.id.detailLocation);

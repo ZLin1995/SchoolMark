@@ -35,7 +35,7 @@ import edu.gatech.schoolmark.model.SportsLocations;
 import edu.gatech.schoolmark.model.User;
 
 
-public class GameListFragment extends Fragment implements AdapterView.OnItemSelectedListener {
+public class EventListFragment extends Fragment implements AdapterView.OnItemSelectedListener {
     private FirebaseAuth mAuth;
     private DatabaseReference currentRef;
     private DatabaseReference mDatabase;
@@ -86,14 +86,14 @@ public class GameListFragment extends Fragment implements AdapterView.OnItemSele
 
     private View root;
 
-    public GameListFragment() {
+    public EventListFragment() {
         //required empty constructor
     }
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
-        root = inflater.inflate(R.layout.fragment_join_game, container, false);
+        root = inflater.inflate(R.layout.fragment_join_event, container, false);
 
         mAuth = FirebaseAuth.getInstance();
         mDatabase = FirebaseDatabase.getInstance().getReference();
@@ -111,7 +111,7 @@ public class GameListFragment extends Fragment implements AdapterView.OnItemSele
         joinEvent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Fragment fragment = new HostGameFragment();
+                Fragment fragment = new HostEventFragment();
                 FragmentManager fm = getFragmentManager();
                 fm.beginTransaction().replace(R.id.home_frame, fragment).commit();
             }
@@ -192,7 +192,7 @@ public class GameListFragment extends Fragment implements AdapterView.OnItemSele
 
         } catch (NullPointerException ex) {
             Log.e(TAG, "database reference retrieved was null");
-            Fragment fragment = new GameListFragment();
+            Fragment fragment = new EventListFragment();
             FragmentManager fm = getFragmentManager();
             fm.beginTransaction().replace(R.id.home_frame, fragment).commit();
         }
@@ -250,7 +250,7 @@ public class GameListFragment extends Fragment implements AdapterView.OnItemSele
 
                 }
                 if (getActivity()!=null) {
-                    GameListAdapter adapter = new GameListAdapter(getActivity(), gameList, dataSnapshot);
+                    EventListAdapter adapter = new EventListAdapter(getActivity(), gameList, dataSnapshot);
                     listViewGame.setAdapter(adapter);
                 }
                 isGameListEmpty();
@@ -290,13 +290,13 @@ public class GameListFragment extends Fragment implements AdapterView.OnItemSele
     }
 
     private void hostGame() {
-        Fragment fragment = new HostGameFragment();
+        Fragment fragment = new HostEventFragment();
         FragmentManager fm = getFragmentManager();
         fm.beginTransaction().replace(R.id.home_frame, fragment).commit();
     }
 
     private void homeScreen() {
-        Fragment fragment = new GameListFragment();
+        Fragment fragment = new EventListFragment();
         FragmentManager fm = getFragmentManager();
         fm.beginTransaction().replace(R.id.home_frame, fragment).commit();
     }
@@ -349,7 +349,7 @@ public class GameListFragment extends Fragment implements AdapterView.OnItemSele
 
 
     public void createEvent(View view) {
-        Fragment fragment = new HostGameFragment();
+        Fragment fragment = new HostEventFragment();
         FragmentManager fm = getFragmentManager();
         fm.beginTransaction().replace(R.id.home_frame, fragment).commit();
     }

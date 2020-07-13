@@ -152,7 +152,7 @@ public class UserProfileFragment extends Fragment implements View.OnClickListene
 
             Toast.makeText(getActivity(), "Your changes have been saved!",
                     Toast.LENGTH_SHORT).show();
-            Fragment fragment = new GameListFragment();
+            Fragment fragment = new EventListFragment();
             FragmentManager fm = getFragmentManager();
             fm.beginTransaction().replace(R.id.home_frame, fragment).commit();
         }
@@ -162,7 +162,7 @@ public class UserProfileFragment extends Fragment implements View.OnClickListene
     public void profileOnBack(View view) {
         Toast.makeText(getActivity(), "You exited without saving your changes.",
                 Toast.LENGTH_SHORT).show();
-        Fragment fragment = new GameListFragment();
+        Fragment fragment = new EventListFragment();
         FragmentManager fm = getFragmentManager();
         fm.beginTransaction().replace(R.id.home_frame, fragment).commit();
 
@@ -199,7 +199,6 @@ public class UserProfileFragment extends Fragment implements View.OnClickListene
         mDatabase = FirebaseDatabase.getInstance().getReference();
         DatabaseReference userRef = mDatabase.child("userList").child(mAuth.getCurrentUser().getUid());
         userRef.removeValue();
-        //TODO: remove this user from every game they are in
 
         FirebaseUser user = mAuth.getCurrentUser();
         user.delete()

@@ -60,7 +60,7 @@ public class MainActivity extends AppCompatActivity {
         };
         mDrawerLayout.addDrawerListener(mDrawerToggle);
 
-        Fragment fragment = new GameListFragment();
+        Fragment fragment = new EventListFragment();
         FragmentManager fragmentManager = getFragmentManager();
         fragmentManager.beginTransaction().replace(R.id.home_frame, fragment).commit();
 
@@ -87,7 +87,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void selectDrawerItem(String item) {
         if (item.equals("Event List")) {
-            Fragment fragment = new GameListFragment();
+            Fragment fragment = new EventListFragment();
             FragmentManager fm = getFragmentManager();
             fm.beginTransaction().replace(R.id.home_frame, fragment).commit();
             mDrawerLayout.closeDrawer(mDrawerList);
@@ -97,7 +97,7 @@ public class MainActivity extends AppCompatActivity {
             fm.beginTransaction().replace(R.id.home_frame, fragment).commit();
             mDrawerLayout.closeDrawer(mDrawerList);
         } else if(item.equals("My Events")) {
-            Fragment fragment = new MyGamesFragment();
+            Fragment fragment = new MyEventFragment();
             FragmentManager fm = getFragmentManager();
             fm.beginTransaction().replace(R.id.home_frame, fragment).commit();
             mDrawerLayout.closeDrawer(mDrawerList);

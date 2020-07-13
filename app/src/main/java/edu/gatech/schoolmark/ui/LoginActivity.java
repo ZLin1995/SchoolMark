@@ -107,7 +107,6 @@ public class LoginActivity extends AppCompatActivity {
 
     private void sendEmail() {
         final FirebaseUser user = mAuth.getCurrentUser();
-        // TODO: Display Error
         if (user == null) { return; }
         user.sendEmailVerification().addOnCompleteListener(this, new OnCompleteListener<Void>() {
             @Override

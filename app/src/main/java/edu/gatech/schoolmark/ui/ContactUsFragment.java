@@ -44,7 +44,7 @@ public class ContactUsFragment extends Fragment implements View.OnClickListener 
 
         Toast.makeText(getActivity(), "Thanks for the feedback!",
                 Toast.LENGTH_SHORT).show();
-        Fragment fragment = new GameListFragment();
+        Fragment fragment = new EventListFragment();
         FragmentManager fm = getFragmentManager();
         fm.beginTransaction().replace(R.id.home_frame, fragment).commit();
     }

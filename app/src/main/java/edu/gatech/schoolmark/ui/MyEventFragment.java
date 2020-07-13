@@ -19,14 +19,12 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import edu.gatech.schoolmark.R;
 import edu.gatech.schoolmark.model.Game;
-import edu.gatech.schoolmark.model.SportsLocations;
-import edu.gatech.schoolmark.model.User;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-public class MyGamesFragment extends Fragment { // AppCompatActivity
+public class MyEventFragment extends Fragment { // AppCompatActivity
     private FirebaseAuth mAuth;
     private DatabaseReference currentRef;
 
@@ -40,14 +38,14 @@ public class MyGamesFragment extends Fragment { // AppCompatActivity
 
     private View root;
 
-    public MyGamesFragment() {
+    public MyEventFragment() {
 
     }
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
-        root = inflater.inflate(R.layout.fragment_my_games, container, false);
+        root = inflater.inflate(R.layout.fragment_my_event, container, false);
 
         mAuth = FirebaseAuth.getInstance();
         currentRef = FirebaseDatabase.getInstance().getReference("gamesList");
@@ -59,7 +57,7 @@ public class MyGamesFragment extends Fragment { // AppCompatActivity
         joinEvent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Fragment fragment = new HostGameFragment();
+                Fragment fragment = new HostEventFragment();
                 FragmentManager fm = getFragmentManager();
                 fm.beginTransaction().replace(R.id.home_frame, fragment).commit();
             }
@@ -86,7 +84,7 @@ public class MyGamesFragment extends Fragment { // AppCompatActivity
                     }
                 }
                 if (getActivity()!=null) {
-                    myGameListAdapter adapter = new myGameListAdapter(getActivity(), gameList, dataSnapshot);
+                    myEventListAdapter adapter = new myEventListAdapter(getActivity(), gameList, dataSnapshot);
                     listViewGame.setAdapter(adapter);
                 }
             }

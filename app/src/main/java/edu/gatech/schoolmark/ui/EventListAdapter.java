@@ -10,7 +10,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -25,7 +24,7 @@ import java.util.List;
 import edu.gatech.schoolmark.R;
 import edu.gatech.schoolmark.model.Game;
 
-public class GameListAdapter extends ArrayAdapter<Game> {
+public class EventListAdapter extends ArrayAdapter<Game> {
     static java.util.Calendar cal = java.util.Calendar.getInstance();
     private Activity context;
     private FirebaseAuth mAuth;
@@ -36,8 +35,8 @@ public class GameListAdapter extends ArrayAdapter<Game> {
 
 
 
-     public GameListAdapter(Activity context, List<Game> gameList, DataSnapshot gamesList) {
-        super(context, R.layout.join_game_list_layout, gameList);
+     public EventListAdapter(Activity context, List<Game> gameList, DataSnapshot gamesList) {
+        super(context, R.layout.join_event_list_layout, gameList);
         this.context = context;
         this.gameList = gameList;
         this.gamesList = gamesList;
@@ -47,7 +46,7 @@ public class GameListAdapter extends ArrayAdapter<Game> {
     public View getView(int position, View convertView, ViewGroup parent) {
         mAuth = FirebaseAuth.getInstance();
         LayoutInflater inflater = context.getLayoutInflater();
-        View listViewItem = inflater.inflate(R.layout.join_game_list_layout, null, true);
+        View listViewItem = inflater.inflate(R.layout.join_event_list_layout, null, true);
         TextView listSport = listViewItem.findViewById(R.id.listSport);
         TextView listLocation = listViewItem.findViewById(R.id.listLocation);
         TextView listTime = listViewItem.findViewById(R.id.listTime);
@@ -109,7 +108,7 @@ public class GameListAdapter extends ArrayAdapter<Game> {
                 bundle.putFloat("intensity", game.getIntensity());
                 bundle.putString("hostID", game.getHostUID());
                 bundle.putString("gameID", game_key);
-                Fragment fragment = new GameDetailFragment();
+                Fragment fragment = new EventDetailFragment();
                 fragment.setArguments(bundle);
                 FragmentManager fm = ((Activity)context).getFragmentManager();
                 fm.beginTransaction().replace(R.id.home_frame, fragment).commit();
