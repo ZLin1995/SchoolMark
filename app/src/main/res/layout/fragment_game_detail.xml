@@ -6,7 +6,7 @@
     android:paddingLeft="10dp"
     android:paddingRight="10dp"
     android:paddingTop="10dp"
-    tools:context="com.pikup.ui.GameDetailFragment">
+    tools:context="edu.gatech.schoolmark.ui.GameDetailFragment">
 
     <TextView
         android:id="@+id/detailSport"
@@ -57,32 +57,32 @@
         android:textAlignment="center"
         android:textSize="18sp" />
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true">>
+<!--    <RelativeLayout-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="48dp"-->
+<!--        android:layout_alignParentLeft="true"-->
+<!--        android:layout_alignParentStart="true"-->
+<!--        android:layout_alignParentTop="true">>-->
 
-        <RatingBar
-            android:id="@+id/listIntensityBar"
-            android:layout_width="240dp"
-            android:layout_height="50dp"
-            android:layout_alignParentTop="true"
-            android:layout_marginLeft="26dp"
-            android:layout_marginStart="26dp"
-            android:layout_toEndOf="@+id/listIntensity"
-            android:layout_toRightOf="@+id/listIntensity"
-            android:isIndicator="true" />
+<!--        <RatingBar-->
+<!--            android:id="@+id/listIntensityBar"-->
+<!--            android:layout_width="240dp"-->
+<!--            android:layout_height="50dp"-->
+<!--            android:layout_alignParentTop="true"-->
+<!--            android:layout_marginLeft="26dp"-->
+<!--            android:layout_marginStart="26dp"-->
+<!--            android:layout_toEndOf="@+id/listIntensity"-->
+<!--            android:layout_toRightOf="@+id/listIntensity"-->
+<!--            android:isIndicator="true" />-->
 
-        <TextView
-            android:id="@+id/listIntensity"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_centerInParent="true"
-            android:text="Intensity"
-            android:textSize="18sp" />
-    </RelativeLayout>
+<!--        <TextView-->
+<!--            android:id="@+id/listIntensity"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_alignParentLeft="true"-->
+<!--            android:layout_centerInParent="true"-->
+<!--            android:text="Intensity"-->
+<!--            android:textSize="18sp" />-->
+<!--    </RelativeLayout>-->
 
 </LinearLayout>

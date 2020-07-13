@@ -53,7 +53,6 @@ public class GameListAdapter extends ArrayAdapter<Game> {
         TextView listTime = listViewItem.findViewById(R.id.listTime);
         TextView listDate = listViewItem.findViewById(R.id.listDate);
 
-        RatingBar listIntensityBar = listViewItem.findViewById(R.id.listIntensityBar);
         Button joinGame = listViewItem.findViewById(R.id.joinGame);
 
         final java.text.DateFormat dateFormat = android.text.format.DateFormat.getDateFormat(getContext());
@@ -66,7 +65,6 @@ public class GameListAdapter extends ArrayAdapter<Game> {
         listTime.setText(timeFormat.format(game.getTimeOfGame()));
         listDate.setText(dateFormat.format(game.getTimeOfGame()));
         listLocation.setText(game.getLocationTitle());
-        listIntensityBar.setRating(game.getIntensity());
 
         mDatabase = FirebaseDatabase.getInstance().getReference();
         currentRef = mDatabase.child("gamesList");
@@ -76,7 +74,6 @@ public class GameListAdapter extends ArrayAdapter<Game> {
         //System.out.print("Game selected: " + gameKey);
 
 
-        // TODO: Fix all the potato code (sorry)
         for(DataSnapshot gameSnapshot: gamesList.getChildren()) {
             Game g = gameSnapshot.getValue(Game.class);
             if (g == null) { break; }

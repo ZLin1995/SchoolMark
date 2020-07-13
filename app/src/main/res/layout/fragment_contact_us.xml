@@ -10,27 +10,24 @@
     android:paddingTop="10dp">
 
     <TextView
-        android:id="@+id/textView_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Contact Us"
-        android:textAppearance="@style/TextAppearance.AppCompat.Large"
-        android:textSize="30sp"
-        tools:text="Contact Us" />
+        android:textAlignment="center"
+        android:textSize="30dp"
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/textView_description"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Thank you for using PikUp. If you have any questions or comments, submit them with the form below. Comments are linked to your account, and we will get back to you as soon as possible."
-        android:textAppearance="@style/TextAppearance.AppCompat"
-        tools:text="Thank you for using PikUp. If you have any questions or comments, submit them with the form below. Comments are linked to your account, and we will get back to you as soon as possible." />
+        android:text="Thank you for using SchoolMark. If you have any questions or suggestions, please don't hesitate to contact us! Comments are linked to your email, and we will get back to you as soon as possible."
+        android:textAppearance="@style/TextAppearance.AppCompat" />
 
     <EditText
         android:id="@+id/editText_comment"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:autoText="false"
         android:ems="10"
         android:gravity="top"
         android:inputType="textMultiLine"
@@ -40,8 +37,7 @@
         android:id="@+id/button_submitFeedback"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:backgroundTint="#ff3f9c"
-        android:text="Submit Feedback"
-        android:textColor="#ffffff" />
+        android:backgroundTint="#8BC34A"
+        android:text="Submit Feedback" />
 
 </LinearLayout>

@@ -1,73 +1,87 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:layout_alignParentLeft="true"
+    android:layout_alignParentStart="true"
+    android:layout_alignParentTop="true">
+
     <TextView
         android:id="@+id/listSport"
-        android:layout_width="match_parent"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/listLocation"
+        android:layout_alignParentTop="true"
+        android:layout_alignRight="@+id/listLocation"
         android:text="TextView"
         android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
         android:textStyle="bold" />
 
     <TextView
         android:id="@+id/listLocation"
-        android:layout_width="match_parent"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/listSport"
         android:text="TextView" />
 
     <TextView
         android:id="@+id/listTime"
-        android:layout_width="match_parent"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/listLocation"
         android:text="TextView" />
 
     <TextView
         android:id="@+id/listDate"
-        android:layout_width="match_parent"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/listTime"
         android:text="TextView" />
 
     <TextView
         android:id="@+id/listCapacity"
-        android:layout_width="match_parent"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:text="TextView" />
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true">
+        android:layout_below="@+id/listDate"
+        android:text="TextView" />
 
-        <TextView
-            android:id="@+id/listIntensity"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_centerInParent="true"
-            android:text="Intensity" />
+<!--    <RelativeLayout-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="48dp"-->
+<!--        android:layout_alignParentLeft="true"-->
+<!--        android:layout_alignParentStart="true"-->
+<!--        android:layout_alignParentTop="true">-->
 
-        <RatingBar
-            android:id="@+id/listIntensityBar"
-            android:layout_width="240dp"
-            android:layout_height="50dp"
-            android:layout_centerVertical="true"
-            android:layout_toEndOf="@+id/listIntensity"
-            android:layout_toRightOf="@+id/listIntensity"
-            android:isIndicator="true" />
+<!--        <TextView-->
+<!--            android:id="@+id/listIntensity"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_alignParentLeft="true"-->
+<!--            android:layout_centerInParent="true"-->
+<!--            android:text="Intensity" />-->
 
-        <Button
-            android:id="@+id/quitGame"
-            style="@style/Widget.AppCompat.Button.Colored"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
-            android:background="#ff3f9c"
-            android:text="quit" />
+<!--        <RatingBar-->
+<!--            android:id="@+id/listIntensityBar"-->
+<!--            android:layout_width="240dp"-->
+<!--            android:layout_height="50dp"-->
+<!--            android:layout_centerVertical="true"-->
+<!--            android:layout_toEndOf="@+id/listIntensity"-->
+<!--            android:layout_toRightOf="@+id/listIntensity"-->
+<!--            android:isIndicator="true" />-->
 
-    </RelativeLayout>
-</LinearLayout>
+    <Button
+        android:id="@+id/quitGame"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:background="#F44336"
+        android:focusable="false"
+        android:text="quit" />
+
+<!--    </RelativeLayout>-->
+</RelativeLayout>

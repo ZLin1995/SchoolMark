@@ -35,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
 
         mDrawerLayout = findViewById(R.id.drawer_layout);
         mDrawerList = findViewById(R.id.left_drawer);
-        String[] drawerItems = {"Game List",  "My Games", "Profile", "Contact Us", "Logout"};
+        String[] drawerItems = {"Event List",  "My Events", "Profile", "Contact Us", "Logout"};
 
         mDrawerList.setAdapter(new ArrayAdapter<String>(this, R.layout.drawer_list_item, R.id.text1 ,drawerItems ));
         mDrawerList.setOnItemClickListener(new DrawerItemClickListener());
@@ -86,7 +86,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void selectDrawerItem(String item) {
-        if (item.equals("Game List")) {
+        if (item.equals("Event List")) {
             Fragment fragment = new GameListFragment();
             FragmentManager fm = getFragmentManager();
             fm.beginTransaction().replace(R.id.home_frame, fragment).commit();
@@ -96,7 +96,7 @@ public class MainActivity extends AppCompatActivity {
             FragmentManager fm = getFragmentManager();
             fm.beginTransaction().replace(R.id.home_frame, fragment).commit();
             mDrawerLayout.closeDrawer(mDrawerList);
-        } else if(item.equals("My Games")) {
+        } else if(item.equals("My Events")) {
             Fragment fragment = new MyGamesFragment();
             FragmentManager fm = getFragmentManager();
             fm.beginTransaction().replace(R.id.home_frame, fragment).commit();

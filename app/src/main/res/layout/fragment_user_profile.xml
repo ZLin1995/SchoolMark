@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="wrap_content">
-
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_gravity="center"
         android:focusable="true"
         android:focusableInTouchMode="true">
@@ -23,22 +23,13 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:id="@+id/textView5"
-                    android:layout_width="200dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Profile"
+                    android:text="User Profile"
                     android:textAlignment="center"
                     android:textSize="30dp"
                     android:textStyle="bold" />
 
-                <Button
-                    android:id="@+id/accountDelete"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:backgroundTint="#ff3f9c"
-                    android:text="Delete Account"
-                    android:textColor="#ffffff" />
             </LinearLayout>
 
             <LinearLayout
@@ -50,7 +41,7 @@
                     android:layout_height="wrap_content"
                     android:textAlignment="center"
                     android:textSize="18dp"
-                    android:text="Display Name: " />
+                    android:text="Name: " />
 
                 <EditText
                     android:id="@+id/userProfileDisplayName"
@@ -102,8 +93,8 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:ems="10"
-                    android:inputType="text"
-                    android:text="" />
+                    android:inputType="number"
+                    android:text=""/>
 
             </LinearLayout>
 
@@ -217,15 +208,37 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Self Introduction:"
+                    android:textAlignment="center"
+                    android:textSize="18dp" />
+
+                <EditText
+                    android:id="@+id/personalProfile"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:ems="10"
+                    android:inputType="textMultiLine"
+                    android:lines="5" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:layout_marginTop="30dp">
 
                 <Button
                     android:id="@+id/userProfileSaveButton"
-                    style="@style/Widget.AppCompat.Button.Colored"
                     android:layout_width="match_parent"
                     android:layout_height="39dp"
-                    android:background="#ff3f9c"
+                    android:background="#8BC34A"
                     android:text="Save" />
 
                 <Button
@@ -233,7 +246,19 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/profileBackButton"
                     android:backgroundTint="@android:color/white"
-                    android:text="Back" />
+                    android:text="Cancel" />
+
+                <Button
+                    android:id="@+id/accountDelete"
+                    style="@style/Widget.AppCompat.Button.Borderless.Colored"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_alignParentBottom="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginBottom="34dp"
+                    android:backgroundTint="#F44336"
+                    android:text="Delete Account"/>
 
             </LinearLayout>
 

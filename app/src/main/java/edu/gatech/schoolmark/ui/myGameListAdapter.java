@@ -56,7 +56,6 @@ public class myGameListAdapter extends ArrayAdapter<Game> {
         TextView listTime = listViewItem.findViewById(R.id.listTime);
         TextView listDate = listViewItem.findViewById(R.id.listDate);
         TextView listCapacity = listViewItem.findViewById(R.id.listCapacity);
-        RatingBar listIntensityBar = listViewItem.findViewById(R.id.listIntensityBar);
         Button quitGame = listViewItem.findViewById(R.id.quitGame);
 
         final java.text.DateFormat dateFormat = android.text.format.DateFormat.getDateFormat(getContext());
@@ -71,7 +70,6 @@ public class myGameListAdapter extends ArrayAdapter<Game> {
         listTime.setText(timeFormat.format(game.getTimeOfGame()));
         listDate.setText(dateFormat.format(game.getTimeOfGame()));
         listLocation.setText(game.getLocationTitle());
-        listIntensityBar.setRating(game.getIntensity());
         listCapacity.setText("Capacity: " + game.getPlayerUIDList().size() + " / " + game.getCapacity());
 
         mDatabase = FirebaseDatabase.getInstance().getReference();

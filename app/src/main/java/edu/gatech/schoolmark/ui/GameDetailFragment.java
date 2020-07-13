@@ -42,7 +42,6 @@ public class GameDetailFragment extends Fragment implements  LocationListener{
         TextView listLocation = root.findViewById(R.id.detailLocation);
         TextView listTime = root.findViewById(R.id.detailTime);
         TextView listDate = root.findViewById(R.id.detailDate);
-        RatingBar listIntensityBar = root.findViewById(R.id.listIntensityBar);
         final TextView hostName = root.findViewById(R.id.detailHost);
         final TextView hostNumber = root.findViewById(R.id.detailHostNum);
 
@@ -54,7 +53,6 @@ public class GameDetailFragment extends Fragment implements  LocationListener{
         String location = args.getString("location");
         String time = args.getString("time");
         String date = args.getString("date");
-        Float intensity = args.getFloat("intensity");
         String hostID = args.getString("hostID");
         final String gameID = args.getString("gameID");
 
@@ -62,7 +60,6 @@ public class GameDetailFragment extends Fragment implements  LocationListener{
         listTime.setText(time);
         listDate.setText(date);
         listLocation.setText(location);
-        listIntensityBar.setRating(intensity);
 
         DatabaseReference hostRef = mDatabase.child("userList").child(hostID);
         hostRef.addValueEventListener(new ValueEventListener() {

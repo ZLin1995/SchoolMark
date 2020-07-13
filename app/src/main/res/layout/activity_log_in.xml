@@ -84,6 +84,6 @@
         android:layout_marginBottom="34dp"
         android:onClick="forgotPassword"
         android:text="Forgot Your Password?"
-        android:textColor="#E91E63" />
+        android:textColor="#F44336" />
 
 </RelativeLayout>

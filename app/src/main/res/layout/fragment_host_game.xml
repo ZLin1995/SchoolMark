@@ -20,210 +20,230 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Host Game"
+                android:text="Host Event"
                 android:textAlignment="center"
                 android:textSize="30dp"
                 android:textStyle="bold" />
 
-            <LinearLayout
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
-                android:weightSum="1">
+                android:layout_weight="1">
 
-                <RelativeLayout
-                    android:layout_width="match_parent"
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerVertical="true"
+                    android:layout_toLeftOf="@+id/eventName"
+                    android:layout_toStartOf="@+id/eventName"
+                    android:layout_weight="1"
+                    android:text="Event Name"
+                    android:textAlignment="center"
+                    android:textSize="18dp" />
+
+                <EditText
+                    android:id="@+id/eventName"
+                    android:layout_width="231dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="1">
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:inputType="text" />
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentLeft="true"
-                        android:layout_alignParentStart="true"
-                        android:layout_centerVertical="true"
-                        android:layout_toLeftOf="@+id/sportSpinner"
-                        android:layout_toStartOf="@+id/sportSpinner"
-                        android:layout_weight="1"
-                        android:text="Sport"
-                        android:textAlignment="center"
-                        android:textSize="18dp" />
+            </RelativeLayout>
 
-                    <Spinner
-                        android:id="@+id/sportSpinner"
-                        android:layout_width="231dp"
-                        android:layout_height="match_parent"
-                        android:layout_alignParentEnd="true"
-                        android:layout_alignParentRight="true" />
-
-                </RelativeLayout>
-
-            </LinearLayout>
-
-            <LinearLayout
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="40dp">
 
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerVertical="true"
+                    android:layout_toLeftOf="@+id/sportSpinner"
+                    android:layout_toStartOf="@+id/sportSpinner"
+                    android:layout_weight="1"
+                    android:text="Event Type"
+                    android:textAlignment="center"
+                    android:textSize="18dp" />
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentLeft="true"
-                        android:layout_alignParentStart="true"
-                        android:layout_centerVertical="true"
-                        android:layout_toLeftOf="@+id/locationSpinner"
-                        android:layout_toStartOf="@+id/locationSpinner"
-                        android:layout_weight="1"
-                        android:text="Location"
-                        android:textAlignment="center"
-                        android:textSize="18dp" />
+                <Spinner
+                    android:id="@+id/sportSpinner"
+                    android:layout_width="231dp"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true" />
 
-                    <Spinner
-                        android:id="@+id/locationSpinner"
-                        android:layout_width="231dp"
-                        android:layout_height="match_parent"
-                        android:layout_alignParentEnd="true"
-                        android:layout_alignParentRight="true"
-                        android:layout_alignParentTop="true" />
-
-                </RelativeLayout>
-
-            </LinearLayout>
-
-            <!--<LinearLayout-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="match_parent"-->
-            <!--android:orientation="horizontal">-->
-
-            <!--<DatePicker-->
-            <!--android:id="@+id/datePicker"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="match_parent"-->
-            <!--android:layout_weight="1.78" />-->
-
-            <!--</LinearLayout>-->
-
-            <!--<LinearLayout-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="match_parent"-->
-            <!--android:orientation="horizontal">-->
-
-            <!--<TimePicker-->
-            <!--android:id="@+id/timePicker"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_weight="1" />-->
-
-            <!---->
-            <!--</LinearLayout>-->
+            </RelativeLayout>
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="40dp">
 
-                <Button
-                    android:id="@+id/datePickButton"
+                <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_centerHorizontal="true"
-                    android:text="Pick a date" />
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerVertical="true"
+                    android:layout_toLeftOf="@+id/locationSpinner"
+                    android:layout_toStartOf="@+id/locationSpinner"
+                    android:layout_weight="1"
+                    android:text="Location"
+                    android:textAlignment="center"
+                    android:textSize="18dp" />
 
-                <CheckBox
-                    android:id="@+id/checkBox"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                <Spinner
+                    android:id="@+id/locationSpinner"
+                    android:layout_width="231dp"
+                    android:layout_height="match_parent"
                     android:layout_alignParentEnd="true"
                     android:layout_alignParentRight="true"
-                    android:layout_alignParentTop="true"
-                    android:layout_marginEnd="19dp"
-                    android:layout_marginRight="19dp"
-                    android:layout_marginTop="48dp"
-                    android:text="CheckBox" />
-
-                <Button
-                    android:id="@+id/timePickButton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/datePickButton"
-                    android:layout_centerHorizontal="true"
-                    android:text="Pick a time" />
-
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <Button
-                    android:id="@+id/helpButton"
-                    android:layout_width="42dp"
-                    android:layout_height="42dp"
-                    android:layout_toEndOf="@+id/intensityBar"
-                    android:layout_toRightOf="@+id/intensityBar"
-                    android:layout_weight="1"
-                    android:background="@drawable/ic_help_outline_black_24dp" />
-
-                <TextView
-                    android:id="@+id/intensityText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentLeft="true"
-                    android:layout_centerInParent="true"
-                    android:layout_weight="1"
-                    android:text="Intensity" />
-
-                <RatingBar
-                    android:id="@+id/intensityBar"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerHorizontal="true"
-                    android:layout_alignParentBottom="true"
-                    android:layout_alignParentTop="true"
-                    android:layout_weight="1" />
-
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <TextView
-                    android:id="@+id/textCapacity"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentLeft="true"
-                    android:layout_centerInParent="true"
-                    android:text="Number of Players" />
-
-                <NumberPicker
-                    android:id="@+id/numberOfPlayers"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerHorizontal="true" />
+                    android:layout_alignParentTop="true" />
 
             </RelativeLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:gravity="center">
+
+                <Button
+                    android:id="@+id/datePickButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Pick a date" />
+
+
+                <Button
+                    android:id="@+id/timePickButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignRight="@+id/datePickButton"
+                    android:text="Pick a time" />
+
+            </LinearLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center">
+
+                <CheckBox
+                    android:id="@+id/approvalCheckBox"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Need Approval" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerVertical="true"
+                    android:layout_toLeftOf="@+id/maxCapacity"
+                    android:layout_toStartOf="@+id/maxCapacity"
+                    android:layout_weight="1"
+                    android:text="Max Capacity"
+                    android:textAlignment="center"
+                    android:textSize="18dp" />
+
+                <EditText
+                    android:id="@+id/maxCapacity"
+                    android:layout_width="231dp"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:ems="10"
+                    android:inputType="number" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerVertical="true"
+                    android:layout_toLeftOf="@+id/currentParticipant"
+                    android:layout_toStartOf="@+id/currentParticipant"
+                    android:layout_weight="1"
+                    android:text="Current Number of Participants"
+                    android:textAlignment="center"
+                    android:textSize="18dp" />
+
+                <EditText
+                    android:id="@+id/currentParticipant"
+                    android:layout_width="231dp"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:ems="10"
+                    android:inputType="number" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerVertical="true"
+                    android:layout_toLeftOf="@+id/eventDescription"
+                    android:layout_toStartOf="@+id/eventDescription"
+                    android:layout_weight="1"
+                    android:text="Event Description"
+                    android:textAlignment="center"
+                    android:textSize="18dp" />
+
+                <EditText
+                    android:id="@+id/eventDescription"
+                    android:layout_width="231dp"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:ems="10"
+                    android:inputType="textMultiLine"
+                    android:lines="5" />
+
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginTop="30dp">
 
                 <Button
                     android:id="@+id/hostGameButton"
-                    style="@style/Widget.AppCompat.Button.Colored"
                     android:layout_width="match_parent"
                     android:layout_height="39dp"
-                    android:background="#ff3f9c"
-                    android:text="Host" />
+                    android:background="#8BC34A"
+                    android:text="Host Event" />
 
                 <Button
                     android:id="@+id/hostGameBackButton"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:backgroundTint="@android:color/white"
-                    android:text="Back" />
+                    android:text="Cancel" />
 
             </LinearLayout>
 

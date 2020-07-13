@@ -18,6 +18,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.NumberPicker;
 import android.widget.RatingBar;
 import android.widget.Spinner;
@@ -62,8 +63,8 @@ public class HostGameFragment extends Fragment implements AdapterView.OnItemSele
     private String sportSelected;
     private String locationSelected;
     static java.util.Calendar cal = java.util.Calendar.getInstance();
-    private RatingBar intensity;
-    private NumberPicker numberOfPlayers;
+    private EditText intensity;
+    private EditText numberOfPlayers;
     private CheckBox checkBox;
 
     private final String sportsListURL = "sportsList/";
@@ -89,13 +90,11 @@ public class HostGameFragment extends Fragment implements AdapterView.OnItemSele
         Button timePickerButton = root.findViewById(R.id.timePickButton);
         Button hostButton = root.findViewById(R.id.hostGameButton);
         Button hostBackButton = root.findViewById(R.id.hostGameBackButton);
-        Button helpButton =  root.findViewById(R.id.helpButton);
 
         datePickerButton.setOnClickListener(this);
         timePickerButton.setOnClickListener(this);
         hostButton.setOnClickListener(this);
         hostBackButton.setOnClickListener(this);
-        helpButton.setOnClickListener(this);
 
         //timePicker = (TimePicker) findViewById(R.id.timePicker);
         //datePicker = (DatePicker) findViewById(R.id.datePicker);
@@ -104,11 +103,9 @@ public class HostGameFragment extends Fragment implements AdapterView.OnItemSele
         sportsList = new ArrayList<>();
         playersList = new ArrayList<>();
         locationSpinner = root.findViewById(R.id.locationSpinner);
-        intensity = root.findViewById(R.id.intensityBar);
-        numberOfPlayers = root.findViewById(R.id.numberOfPlayers);
-        checkBox = root.findViewById(R.id.checkBox);
-        numberOfPlayers.setMinValue(0);
-        numberOfPlayers.setMaxValue(30);
+        intensity = root.findViewById(R.id.currentParticipant);
+        numberOfPlayers = root.findViewById(R.id.maxCapacity);
+        checkBox = root.findViewById(R.id.approvalCheckBox);
 
         try {
             currentRef = mDatabase.child(sportsListURL);
@@ -178,24 +175,7 @@ public class HostGameFragment extends Fragment implements AdapterView.OnItemSele
             hostNewGame(v);
         } else if (v.getId() == R.id.hostGameBackButton) {
             cancelGame(v);
-        } else if (v.getId() == R.id.helpButton) {
-            showHelp(v);
         }
-    }
-
-    public void showHelp(View view) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        builder.setTitle("Intensity Meter");
-        builder.setMessage("The intensity meter gauges how competitive or intense you expect a game to be. For example, an intensity of 5 would be a game played on a really high level," +
-                            " while an intensity of 3 would be a moderately intense game.");
-        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-
-            }
-        });
-        AlertDialog dialog = builder.create();
-        dialog.show();
     }
 
     private void attachListenerToSpinner() {
@@ -230,12 +210,12 @@ public class HostGameFragment extends Fragment implements AdapterView.OnItemSele
         newGame.setIsExclusive(checkBox.isChecked());
         newGame.setIsHostStudent(isHostStudent);
 
-        if (intensity.getRating() > 0) {
-            newGame.setIntensity((int) intensity.getRating());
-        }
-        if (numberOfPlayers.getValue() > 0) {
-            newGame.setCapacity(numberOfPlayers.getValue());
-        }
+//        if (intensity.getRating() > 0) {
+//            newGame.setIntensity((int) intensity.getRating());
+//        }
+//        if (numberOfPlayers.getValue() > 0) {
+//            newGame.setCapacity(numberOfPlayers.getValue());
+//        }
         // storing the date from Calendar object
         // MONTH IS STORED FROM 0-11, ADD 1 WHEN CALLED FROM DATABASE
         // WHY NOT JUST ADD 1 HERE DUDE

@@ -11,12 +11,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ExpandableListView;
 import android.widget.ListView;
 import android.widget.Spinner;
-import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 
@@ -50,10 +47,10 @@ public class GameListFragment extends Fragment implements AdapterView.OnItemSele
     private final String gamesListURL = "gamesList/";
 
 
-    private final String spSel = "Any Sport";
-    private final String loSel = "Any Location";
-    private final String inSel = "Any Intensity";
-    private final String plSel = "Any Player";
+    private final String spSel = "Event Type";
+    private final String loSel = "Location";
+    private final String inSel = "Max Capacity";
+    private final String plSel = "Any Approval";
 
 
     private boolean gamesExist;
@@ -160,11 +157,11 @@ public class GameListFragment extends Fragment implements AdapterView.OnItemSele
             }
         });
 
-        intensity.add("1");
-        intensity.add("2");
-        intensity.add("3");
-        intensity.add("4");
-        intensity.add("5");
+        intensity.add("10");
+        intensity.add("20");
+        intensity.add("30");
+        intensity.add("40");
+        intensity.add("50+");
 
         // Add sports and locations to the spinners
         // Get Sports List and Locations List from the Database
