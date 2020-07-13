@@ -6,7 +6,7 @@ import java.util.List;
 
 
 
-public class Game {
+public class Event {
 
     private String sport;
     private Date timeOfGame;
@@ -23,7 +23,7 @@ public class Game {
 
     private boolean isHostStudent;
 
-    public Game() {
+    public Event() {
         this.sport = "";
         this.timeOfGame = new Date();
         this.locationTitle = "";
@@ -37,7 +37,7 @@ public class Game {
         this.isExclusive = false;
     }
 
-    public Game(String sport, Date timeOfGame, String locationTitle, double locationLatitude, double locationLongitude, int capacity , int intensity, String gameStatus, String hostUID, ArrayList<String> playerUIDList, boolean isEx) {
+    public Event(String sport, Date timeOfGame, String locationTitle, double locationLatitude, double locationLongitude, int capacity , int intensity, String gameStatus, String hostUID, ArrayList<String> playerUIDList, boolean isEx) {
         this.sport = sport;
         this.timeOfGame = timeOfGame;
         this.locationTitle = locationTitle;
@@ -152,8 +152,8 @@ public class Game {
 
     @Override
     public boolean equals(Object o) {
-        if (!(o instanceof Game)) { return false; }
-        Game g = (Game) o;
+        if (!(o instanceof Event)) { return false; }
+        Event g = (Event) o;
 
         if (sport.equals(g.getSport())
                 && timeOfGame.equals(g.getTimeOfGame())

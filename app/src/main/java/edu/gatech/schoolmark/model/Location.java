@@ -5,13 +5,13 @@ import java.util.List;
 
 
 
-public class SportsLocations {
+public class Location {
 
     private String game;
     private List<String> locations;
 
-    public SportsLocations() { locations = new ArrayList<>(); }
-    public SportsLocations(String game, List<String> locations) {
+    public Location() { locations = new ArrayList<>(); }
+    public Location(String game, List<String> locations) {
         this.game = game;
         this.locations = locations;
         if (this.locations == null) {
@@ -31,7 +31,7 @@ public class SportsLocations {
 //        if (o instanceof String) {
 //            return (o.equals(game));
 //        }
-        SportsLocations s = (SportsLocations) o;
+        Location s = (Location) o;
         return (s.getGame().equals(game) && s.getLocations().equals(locations));
     }
 

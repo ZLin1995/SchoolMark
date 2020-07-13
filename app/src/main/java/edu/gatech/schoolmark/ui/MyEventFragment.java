@@ -18,7 +18,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import edu.gatech.schoolmark.R;
-import edu.gatech.schoolmark.model.Game;
+import edu.gatech.schoolmark.model.Event;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,8 +31,8 @@ public class MyEventFragment extends Fragment { // AppCompatActivity
     FloatingActionButton joinEvent;
 
     ListView listViewGame;
-    List<Game> gameList;
-    Game selectedGame;
+    List<Event> eventList;
+    Event selectedEvent;
     String userUID;
     Map<Integer, String> viewTohostUID;
 
@@ -51,7 +51,7 @@ public class MyEventFragment extends Fragment { // AppCompatActivity
         currentRef = FirebaseDatabase.getInstance().getReference("gamesList");
         listViewGame = root.findViewById(R.id.listViewGame);
         userUID = mAuth.getCurrentUser().getUid();
-        gameList = new ArrayList<>();
+        eventList = new ArrayList<>();
 
         joinEvent = root.findViewById(R.id.createEvent);
         joinEvent.setOnClickListener(new View.OnClickListener() {
@@ -75,16 +75,16 @@ public class MyEventFragment extends Fragment { // AppCompatActivity
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 //String gameKey = dataSnapshot.get
-                gameList.clear();
+                eventList.clear();
                 for (DataSnapshot gameSnapshot : dataSnapshot.getChildren()) {
-                    Game game = gameSnapshot.getValue(Game.class);
+                    Event event = gameSnapshot.getValue(Event.class);
                     //Log.i(TAG, gam)
-                    if (game.getPlayerUIDList().contains(userUID)) {
-                        gameList.add(game);
+                    if (event.getPlayerUIDList().contains(userUID)) {
+                        eventList.add(event);
                     }
                 }
                 if (getActivity()!=null) {
-                    myEventListAdapter adapter = new myEventListAdapter(getActivity(), gameList, dataSnapshot);
+                    myEventListAdapter adapter = new myEventListAdapter(getActivity(), eventList, dataSnapshot);
                     listViewGame.setAdapter(adapter);
                 }
             }

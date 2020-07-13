@@ -30,8 +30,8 @@ import java.util.List;
 import java.util.Map;
 
 import edu.gatech.schoolmark.R;
-import edu.gatech.schoolmark.model.Game;
-import edu.gatech.schoolmark.model.SportsLocations;
+import edu.gatech.schoolmark.model.Event;
+import edu.gatech.schoolmark.model.Location;
 import edu.gatech.schoolmark.model.User;
 
 
@@ -57,7 +57,7 @@ public class EventListFragment extends Fragment implements AdapterView.OnItemSel
 
     ExpandableListView filterBy;
     ListView listViewGame;
-    List<Game> gameList;
+    List<Event> eventList;
     String userUID;
     Map<Integer, String> viewTohostUID;
     private List<String> listDataHeader;
@@ -74,7 +74,7 @@ public class EventListFragment extends Fragment implements AdapterView.OnItemSel
     List<String> location;
     List<String> player;
     List<String> intensity;
-    List<SportsLocations> lSportsLocations;
+    List<Location> lSportsLocations;
 
     String spSelected;
     String loSelected;
@@ -100,7 +100,7 @@ public class EventListFragment extends Fragment implements AdapterView.OnItemSel
         currentRef = FirebaseDatabase.getInstance().getReference(gamesListURL);
         listViewGame = root.findViewById(R.id.listViewGame);
         userUID = mAuth.getCurrentUser().getUid();
-        gameList = new ArrayList<>();
+        eventList = new ArrayList<>();
 
         sportSpinner = root.findViewById(R.id.sport_spinner);
         locationSpinner = root.findViewById(R.id.location_spinner);
@@ -121,7 +121,7 @@ public class EventListFragment extends Fragment implements AdapterView.OnItemSel
         location = new ArrayList<String>();
         player = new ArrayList<String>();
         intensity = new ArrayList<String>();
-        lSportsLocations = new ArrayList<SportsLocations>();
+        lSportsLocations = new ArrayList<Location>();
 
         //populating the spinners
         spSelected = spSel;
@@ -164,7 +164,7 @@ public class EventListFragment extends Fragment implements AdapterView.OnItemSel
         intensity.add("50+");
 
         // Add sports and locations to the spinners
-        // Get Sports List and Locations List from the Database
+        // Get EventType List and Locations List from the Database
         try {
             currentRef = mDatabase.child(sportsListURL);
             currentRef.addValueEventListener(new ValueEventListener() {
@@ -172,11 +172,11 @@ public class EventListFragment extends Fragment implements AdapterView.OnItemSel
                 public void onDataChange(DataSnapshot dataSnapshot) {
                     for (DataSnapshot snapshotChunk: dataSnapshot.getChildren()) {
                         lSportsLocations
-                                .add(snapshotChunk.getValue(SportsLocations.class));
+                                .add(snapshotChunk.getValue(Location.class));
                     }
 
                     // This Adds all possible sports to the sport list.
-                    for (SportsLocations s: lSportsLocations) {
+                    for (Location s: lSportsLocations) {
                         sport.add(s.getGame());
                     }
 
@@ -236,21 +236,21 @@ public class EventListFragment extends Fragment implements AdapterView.OnItemSel
         currentRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                gameList.clear();
+                eventList.clear();
                 // Need this to properly prompt the user when there are legit no games.
                 gamesExist = dataSnapshot.exists();
                 for(DataSnapshot gameSnapshot: dataSnapshot.getChildren()) {
-                    Game game = gameSnapshot.getValue(Game.class);
-                    if ((fitsFilter(game)) && (!userUID.equals(game.getHostUID()))
-                            && (!(game.getPlayerUIDList().contains(userUID)))
-                            && game.getCapacity() > game.getPlayerUIDList().size()
-                            && !(game.getIsExclusive() && isStudent != game.getIsHostStudent())) {
-                        gameList.add(game);
+                    Event event = gameSnapshot.getValue(Event.class);
+                    if ((fitsFilter(event)) && (!userUID.equals(event.getHostUID()))
+                            && (!(event.getPlayerUIDList().contains(userUID)))
+                            && event.getCapacity() > event.getPlayerUIDList().size()
+                            && !(event.getIsExclusive() && isStudent != event.getIsHostStudent())) {
+                        eventList.add(event);
                     }
 
                 }
                 if (getActivity()!=null) {
-                    EventListAdapter adapter = new EventListAdapter(getActivity(), gameList, dataSnapshot);
+                    EventListAdapter adapter = new EventListAdapter(getActivity(), eventList, dataSnapshot);
                     listViewGame.setAdapter(adapter);
                 }
                 isGameListEmpty();
@@ -312,8 +312,8 @@ public class EventListFragment extends Fragment implements AdapterView.OnItemSel
                 location.clear();
                 location.add(loSel);
                 // If they selected a sport, then fill that spinner with a list of valid locations
-                for (SportsLocations s: lSportsLocations) {
-                    // Log.v(TAG, "TEMP: " + temp + " SportsLocations: " + s.toString() + " comparison: " + (s.equals(temp)));
+                for (Location s: lSportsLocations) {
+                    // Log.v(TAG, "TEMP: " + temp + " Location: " + s.toString() + " comparison: " + (s.equals(temp)));
                     if (s.equals(temp)) {
                         location.addAll(s.getLocations());
                     }
@@ -354,7 +354,7 @@ public class EventListFragment extends Fragment implements AdapterView.OnItemSel
         fm.beginTransaction().replace(R.id.home_frame, fragment).commit();
     }
 
-    private boolean fitsFilter(Game g) {
+    private boolean fitsFilter(Event g) {
         if ((g.getSport().equals(spSelected) || spSelected.equals(spSel))
             && (g.getLocationTitle().equals(loSelected) || loSelected.equals(loSel))
             && (inSelected.equals(Integer.toString(g.getIntensity())) || inSelected.equals(inSel))) {
