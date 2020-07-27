@@ -28,7 +28,7 @@ public class MyEventFragment extends Fragment { // AppCompatActivity
     private FirebaseAuth mAuth;
     private DatabaseReference currentRef;
 
-    FloatingActionButton joinEvent;
+    FloatingActionButton hostEvent;
 
     ListView listViewGame;
     List<Event> eventList;
@@ -53,8 +53,8 @@ public class MyEventFragment extends Fragment { // AppCompatActivity
         userUID = mAuth.getCurrentUser().getUid();
         eventList = new ArrayList<>();
 
-        joinEvent = root.findViewById(R.id.createEvent);
-        joinEvent.setOnClickListener(new View.OnClickListener() {
+        hostEvent = root.findViewById(R.id.createEvent);
+        hostEvent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Fragment fragment = new HostEventFragment();

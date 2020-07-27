@@ -53,7 +53,7 @@ public class Event {
         return event;
     }
 
-    public void setEvent(String sport) {
+    public void setEvent(String event) {
         this.event = event;
     }
 

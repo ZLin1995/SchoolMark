@@ -1,7 +1,9 @@
 package edu.gatech.schoolmark.ui;
 
+import android.app.AlertDialog;
 import android.app.Fragment;
 import android.app.FragmentManager;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -45,32 +47,33 @@ public class EventListFragment extends Fragment implements AdapterView.OnItemSel
     private final String eventsListURL = "eventsList/";
 
 
-    private final String spSel = "Event Type";
-    private final String loSel = "EventsLocations";
-    private final String plSel = "All Participant";
+    private final String spSel = "Any Sport";
+    private final String loSel = "Any Location";
+    private final String inSel = "Any Intensity";
+    private final String plSel = "Any Player";
 
 
-    private boolean gamesExist;
+    private boolean eventsExist;
 
     ExpandableListView filterBy;
-    ListView listViewGame;
+    ListView listViewEvent;
     List<Event> eventList;
     String userUID;
     Map<Integer, String> viewTohostUID;
     private List<String> listDataHeader;
     private HashMap<String, List<String>> listDataChild;
 
-    Spinner sportSpinner;
+    Spinner eventSpinner;
     Spinner locationSpinner;
     Spinner playerSpinner;
-    Spinner intensitySpinner;
+    Spinner capacitySpinner;
+    FloatingActionButton hostEvent;
 
-    FloatingActionButton joinEvent;
-
-    List<String> sport;
+    List<String> event;
     List<String> location;
     List<String> player;
-    List<EventsLocations> lSportsEventsLocations;
+    List<String> intensity;
+    List<EventsLocations> EventTypeLocations;
 
     String spSelected;
     String loSelected;
@@ -94,38 +97,42 @@ public class EventListFragment extends Fragment implements AdapterView.OnItemSel
         mAuth = FirebaseAuth.getInstance();
         mDatabase = FirebaseDatabase.getInstance().getReference();
         currentRef = FirebaseDatabase.getInstance().getReference(eventsListURL);
-        listViewGame = root.findViewById(R.id.listViewGame);
+        listViewEvent = (ListView) root.findViewById(R.id.listViewGame);
         userUID = mAuth.getCurrentUser().getUid();
         eventList = new ArrayList<>();
 
-        sportSpinner = root.findViewById(R.id.sport_spinner);
-        locationSpinner = root.findViewById(R.id.location_spinner);
-        playerSpinner = root.findViewById(R.id.player_spinner);
+        eventSpinner = (Spinner) root.findViewById(R.id.sport_spinner);
+        locationSpinner = (Spinner) root.findViewById(R.id.location_spinner);
+        playerSpinner = (Spinner) root.findViewById(R.id.player_spinner);
+        capacitySpinner = (Spinner) root.findViewById(R.id.capacity_spinner);
 
-        joinEvent = root.findViewById(R.id.createEvent);
-        joinEvent.setOnClickListener(new View.OnClickListener() {
+        event = new ArrayList<String>();
+        location = new ArrayList<String>();
+        player = new ArrayList<String>();
+        intensity = new ArrayList<String>();
+        EventTypeLocations = new ArrayList<EventsLocations>();
+
+        hostEvent = root.findViewById(R.id.createEvent);
+        hostEvent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Fragment fragment = new HostEventFragment();
                 FragmentManager fm = getFragmentManager();
-                fm.beginTransaction().replace(R.id.home_frame, fragment).commit();
+                fm.beginTransaction().replace(R.id.home_frame, fragment).addToBackStack( "tag" ).commit();
             }
         });
-
-        sport = new ArrayList<String>();
-        location = new ArrayList<String>();
-        player = new ArrayList<String>();
-        lSportsEventsLocations = new ArrayList<EventsLocations>();
 
         //populating the spinners
         spSelected = spSel;
         loSelected = loSel;
+        inSelected = inSel;
         plSelected = plSel;
 
 
-        sport.add(spSel);
+        event.add(spSel);
         location.add(loSel);
         player.add(plSel);
+        intensity.add(inSel);
 
         DatabaseReference userRef = mDatabase.child("userList").child(mAuth.getCurrentUser().getUid());
         userRef.addValueEventListener(new ValueEventListener() {
@@ -137,7 +144,7 @@ public class EventListFragment extends Fragment implements AdapterView.OnItemSel
                         player.add("Students Only");
                         isStudent = true;
                     } else {
-                        player.add("Staff Only");
+                        player.add("Faculty Only");
                         isStudent = false;
                     }
                 }
@@ -149,24 +156,32 @@ public class EventListFragment extends Fragment implements AdapterView.OnItemSel
             }
         });
 
-        // Add types and locations to the spinners
-        // Get Types List and Locations List from the Database
+        intensity.add("10");
+        intensity.add("20");
+        intensity.add("30");
+        intensity.add("40");
+        intensity.add("50");
+
+        // Add sports and locations to the spinners
+        // Get Sports List and Locations List from the Database
         try {
             currentRef = mDatabase.child(typesListURL);
             currentRef.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
                     for (DataSnapshot snapshotChunk: dataSnapshot.getChildren()) {
-                        lSportsEventsLocations
+                        EventTypeLocations
                                 .add(snapshotChunk.getValue(EventsLocations.class));
                     }
 
-                    // This Adds all possible sports to the sport list.
-                    for (EventsLocations s: lSportsEventsLocations) {
-                        sport.add(s.getEvent());
+                    // This Adds all possible sports to the event list.
+                    for (EventsLocations s: EventTypeLocations) {
+                        event.add(s.getEvent());
                     }
 
                 }
+
+
 
                 @Override
                 public void onCancelled(DatabaseError databaseError) {
@@ -182,9 +197,9 @@ public class EventListFragment extends Fragment implements AdapterView.OnItemSel
         }
 
         ArrayAdapter<String> sportAdapter = new ArrayAdapter<String>(getActivity(),
-                android.R.layout.simple_spinner_item, sport);
+                android.R.layout.simple_spinner_item, event);
         sportAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        sportSpinner.setAdapter(sportAdapter);
+        eventSpinner.setAdapter(sportAdapter);
 
         ArrayAdapter<String> locationAdapter = new ArrayAdapter<String>(getActivity(),
                 android.R.layout.simple_spinner_item, location);
@@ -197,7 +212,14 @@ public class EventListFragment extends Fragment implements AdapterView.OnItemSel
         playerSpinner.setAdapter(playerAdapter);
 
 
-        sportSpinner.setOnItemSelectedListener(this);
+        ArrayAdapter<String> intensityAdapter = new ArrayAdapter<String>(getActivity(),
+                android.R.layout.simple_spinner_item, intensity);
+        intensityAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        capacitySpinner.setAdapter(intensityAdapter);
+
+
+        eventSpinner.setOnItemSelectedListener(this);
+        capacitySpinner.setOnItemSelectedListener(this);
         locationSpinner.setOnItemSelectedListener(this);
         playerSpinner.setOnItemSelectedListener(this);
 
@@ -215,7 +237,7 @@ public class EventListFragment extends Fragment implements AdapterView.OnItemSel
             public void onDataChange(DataSnapshot dataSnapshot) {
                 eventList.clear();
                 // Need this to properly prompt the user when there are legit no games.
-                gamesExist = dataSnapshot.exists();
+                eventsExist = dataSnapshot.exists();
                 for(DataSnapshot gameSnapshot: dataSnapshot.getChildren()) {
                     Event event = gameSnapshot.getValue(Event.class);
                     if ((fitsFilter(event)) && (!userUID.equals(event.getHostUID()))
@@ -228,7 +250,7 @@ public class EventListFragment extends Fragment implements AdapterView.OnItemSel
                 }
                 if (getActivity()!=null) {
                     EventListAdapter adapter = new EventListAdapter(getActivity(), eventList, dataSnapshot);
-                    listViewGame.setAdapter(adapter);
+                    listViewEvent.setAdapter(adapter);
                 }
             }
 
@@ -241,16 +263,17 @@ public class EventListFragment extends Fragment implements AdapterView.OnItemSel
     }
 
 
+
     private void hostGame() {
         Fragment fragment = new HostEventFragment();
         FragmentManager fm = getFragmentManager();
-        fm.beginTransaction().replace(R.id.home_frame, fragment).commit();
+        fm.beginTransaction().replace(R.id.home_frame, fragment).addToBackStack( "tag" ).commit();
     }
 
     private void homeScreen() {
         Fragment fragment = new EventListFragment();
         FragmentManager fm = getFragmentManager();
-        fm.beginTransaction().replace(R.id.home_frame, fragment).commit();
+        fm.beginTransaction().replace(R.id.home_frame, fragment).addToBackStack( "tag" ).commit();
     }
 
 
@@ -258,14 +281,14 @@ public class EventListFragment extends Fragment implements AdapterView.OnItemSel
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         if (parent.getItemAtPosition(position) instanceof String){
             String temp = (String) parent.getItemAtPosition(position);
-            // clear the list back to default, if a sport is selected then populate it
+            // clear the list back to default, if a event is selected then populate it
 
-            if (parent.getId() == sportSpinner.getId()) {
+            if (parent.getId() == eventSpinner.getId()) {
                 location.clear();
                 location.add(loSel);
-                // If they selected a sport, then fill that spinner with a list of valid locations
-                for (EventsLocations s: lSportsEventsLocations) {
-                    // Log.v(TAG, "TEMP: " + temp + " EventsLocations: " + s.toString() + " comparison: " + (s.equals(temp)));
+                // If they selected a event, then fill that spinner with a list of valid locations
+                for (EventsLocations s: EventTypeLocations) {
+                    // Log.v(TAG, "TEMP: " + temp + " SportsLocations: " + s.toString() + " comparison: " + (s.equals(temp)));
                     if (s.equals(temp)) {
                         location.addAll(s.getLocations());
                     }
@@ -279,9 +302,14 @@ public class EventListFragment extends Fragment implements AdapterView.OnItemSel
             if (parent.getId() == playerSpinner.getId()) {
                 plSelected = temp;
             }
+            if (parent.getId() == capacitySpinner.getId()) {
+                inSelected = temp;
+                isExclusive = !temp.equals(plSel);
+            }
 
         }
 
+        // Refreshes the listView, without this call the filters don't change anything
         onStart();
 
     }
@@ -290,24 +318,19 @@ public class EventListFragment extends Fragment implements AdapterView.OnItemSel
     public void onNothingSelected(AdapterView<?> parent) {
         spSelected = spSel;
         loSelected = loSel;
+        inSelected = inSel;
         plSelected = plSel;
     }
 
 
-    public void createEvent(View view) {
-        Fragment fragment = new HostEventFragment();
-        FragmentManager fm = getFragmentManager();
-        fm.beginTransaction().replace(R.id.home_frame, fragment).commit();
-    }
-
     private boolean fitsFilter(Event g) {
         if ((g.getEvent().equals(spSelected) || spSelected.equals(spSel))
-            && (g.getLocationTitle().equals(loSelected) || loSelected.equals(loSel))) {
+                && (g.getLocationTitle().equals(loSelected) || loSelected.equals(loSel))) {
             if ((isExclusive && (isStudent == g.getIsHostStudent())) || plSelected.equals(plSel)) {
                 return true;
             }
         }
-        
+
         return false;
     }
 }
