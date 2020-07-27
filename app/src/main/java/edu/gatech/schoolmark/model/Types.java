@@ -5,10 +5,10 @@ import java.util.List;
 
 
 
-public class EventType {
+public class Types {
     private List<String> types;
 
-    public EventType() {
+    public Types() {
         this.types = new ArrayList<>();
     }
 

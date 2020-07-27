@@ -30,16 +30,16 @@ public class EventListAdapter extends ArrayAdapter<Event> {
     private FirebaseAuth mAuth;
     private DatabaseReference mDatabase;
     private DatabaseReference currentRef;
-    private DataSnapshot gamesList;
+    private DataSnapshot eventsList;
     private List<Event> eventList;
 
 
 
-     public EventListAdapter(Activity context, List<Event> eventList, DataSnapshot gamesList) {
+     public EventListAdapter(Activity context, List<Event> eventList, DataSnapshot eventsList) {
         super(context, R.layout.join_event_list_layout, eventList);
         this.context = context;
         this.eventList = eventList;
-        this.gamesList = gamesList;
+        this.eventsList = eventsList;
     }
 
 
@@ -47,33 +47,29 @@ public class EventListAdapter extends ArrayAdapter<Event> {
         mAuth = FirebaseAuth.getInstance();
         LayoutInflater inflater = context.getLayoutInflater();
         View listViewItem = inflater.inflate(R.layout.join_event_list_layout, null, true);
-        TextView listSport = listViewItem.findViewById(R.id.listSport);
+        TextView listSport = listViewItem.findViewById(R.id.listEvent);
         TextView listLocation = listViewItem.findViewById(R.id.listLocation);
         TextView listTime = listViewItem.findViewById(R.id.listTime);
         TextView listDate = listViewItem.findViewById(R.id.listDate);
 
-        Button joinGame = listViewItem.findViewById(R.id.joinGame);
+        Button joinGame = listViewItem.findViewById(R.id.joinEvent);
 
         final java.text.DateFormat dateFormat = android.text.format.DateFormat.getDateFormat(getContext());
         final java.text.DateFormat timeFormat = android.text.format.DateFormat.getTimeFormat(getContext());
         final Event event = eventList.get(position);
         String gameKey = "";
 
-        cal.setTime(event.getTimeOfGame());
-        listSport.setText(event.getSport());
-        listTime.setText(timeFormat.format(event.getTimeOfGame()));
-        listDate.setText(dateFormat.format(event.getTimeOfGame()));
+        cal.setTime(event.getTimeOfEvent());
+        listSport.setText(event.getEvent());
+        listTime.setText(timeFormat.format(event.getTimeOfEvent()));
+        listDate.setText(dateFormat.format(event.getTimeOfEvent()));
         listLocation.setText(event.getLocationTitle());
 
         mDatabase = FirebaseDatabase.getInstance().getReference();
-        currentRef = mDatabase.child("gamesList");
-
-        //final String game_key = mDatabase.child("gamesList").push().getKey();
-        //currentRef.child(gameKey).removeValue();
-        //System.out.print("Event selected: " + gameKey);
+        currentRef = mDatabase.child("eventsList");
 
 
-        for(DataSnapshot gameSnapshot: gamesList.getChildren()) {
+        for(DataSnapshot gameSnapshot: eventsList.getChildren()) {
             Event g = gameSnapshot.getValue(Event.class);
             if (g == null) { break; }
             if (g.equals(event)) {
@@ -89,8 +85,8 @@ public class EventListAdapter extends ArrayAdapter<Event> {
                  List<String> editedList = event.getPlayerUIDList();
                  editedList.add(mAuth.getCurrentUser().getUid());
                  event.setPlayerUIDList((ArrayList<String>) editedList);
-                 mDatabase.child("gamesList").child(game_key).child("playerUIDList").setValue(editedList);
-                 String toastText = "You have successfully joined the " + event.getSport() + " event on " + event.getTimeOfGame().toString().substring(0, 10);
+                 mDatabase.child("eventsList").child(game_key).child("playerUIDList").setValue(editedList);
+                 String toastText = "You have successfully joined the " + event.getEvent() + " event on " + event.getTimeOfEvent().toString().substring(0, 10);
                  Toast temp = Toast.makeText(context, toastText, Toast.LENGTH_LONG);
                  temp.setGravity(Gravity.CENTER,0,0);
                  temp.show();
@@ -101,11 +97,10 @@ public class EventListAdapter extends ArrayAdapter<Event> {
             @Override
             public void onClick(View view) {
                 Bundle bundle = new Bundle();
-                bundle.putString("sport", event.getSport());
+                bundle.putString("sport", event.getEvent());
                 bundle.putString("location", event.getLocationTitle());
-                bundle.putString("time", timeFormat.format(event.getTimeOfGame()));
-                bundle.putString("date", dateFormat.format(event.getTimeOfGame()));
-                bundle.putFloat("intensity", event.getIntensity());
+                bundle.putString("time", timeFormat.format(event.getTimeOfEvent()));
+                bundle.putString("date", dateFormat.format(event.getTimeOfEvent()));
                 bundle.putString("hostID", event.getHostUID());
                 bundle.putString("gameID", game_key);
                 Fragment fragment = new EventDetailFragment();

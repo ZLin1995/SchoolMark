@@ -71,8 +71,8 @@ public class EventDetailFragment extends Fragment implements  LocationListener{
             }
         });
 
-        DatabaseReference gamesRef = mDatabase.child("gamesList");
-        final HashMap<String, Integer> gameMap = new HashMap<>();;
+        DatabaseReference gamesRef = mDatabase.child("eventsList");
+        final HashMap<String, Integer> gameMap = new HashMap<>();
 
         return root;
     }

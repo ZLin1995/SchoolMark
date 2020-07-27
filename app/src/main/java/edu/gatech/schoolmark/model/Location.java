@@ -7,36 +7,36 @@ import java.util.List;
 
 public class Location {
 
-    private String game;
+    private String event;
     private List<String> locations;
 
     public Location() { locations = new ArrayList<>(); }
-    public Location(String game, List<String> locations) {
-        this.game = game;
+    public Location(String event, List<String> locations) {
+        this.event = event;
         this.locations = locations;
         if (this.locations == null) {
             this.locations = new ArrayList<>();
         }
     }
 
-    public String getGame() { return game; }
+    public String getEvent() { return event; }
 
     public List<String> getLocations() { return locations; }
 
     public void setLocations(List<String> locations) { this.locations = locations; }
 
-    public String toString() { return game; }
+    public String toString() { return event; }
 
     public boolean equals(Object o) {
 //        if (o instanceof String) {
 //            return (o.equals(game));
 //        }
         Location s = (Location) o;
-        return (s.getGame().equals(game) && s.getLocations().equals(locations));
+        return (s.getEvent().equals(event) && s.getLocations().equals(locations));
     }
 
     public boolean equals(String s) {
-        return s.equals(game);
+        return s.equals(event);
     }
 
 }

@@ -63,15 +63,15 @@
                     android:layout_alignParentLeft="true"
                     android:layout_alignParentStart="true"
                     android:layout_centerVertical="true"
-                    android:layout_toLeftOf="@+id/sportSpinner"
-                    android:layout_toStartOf="@+id/sportSpinner"
+                    android:layout_toLeftOf="@+id/eventSpinner"
+                    android:layout_toStartOf="@+id/eventSpinner"
                     android:layout_weight="1"
                     android:text="Event Type"
                     android:textAlignment="center"
                     android:textSize="18dp" />
 
                 <Spinner
-                    android:id="@+id/sportSpinner"
+                    android:id="@+id/eventSpinner"
                     android:layout_width="231dp"
                     android:layout_height="match_parent"
                     android:layout_alignParentEnd="true"
@@ -133,10 +133,10 @@
                 android:gravity="center">
 
                 <CheckBox
-                    android:id="@+id/approvalCheckBox"
+                    android:id="@+id/checkBox"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Need Approval" />
+                    android:text="Exclusive" />
 
             </RelativeLayout>
 
@@ -159,34 +159,6 @@
 
                 <EditText
                     android:id="@+id/maxCapacity"
-                    android:layout_width="231dp"
-                    android:layout_height="match_parent"
-                    android:layout_alignParentEnd="true"
-                    android:layout_alignParentRight="true"
-                    android:ems="10"
-                    android:inputType="number" />
-
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentStart="true"
-                    android:layout_centerVertical="true"
-                    android:layout_toLeftOf="@+id/currentParticipant"
-                    android:layout_toStartOf="@+id/currentParticipant"
-                    android:layout_weight="1"
-                    android:text="Current Number of Participants"
-                    android:textAlignment="center"
-                    android:textSize="18dp" />
-
-                <EditText
-                    android:id="@+id/currentParticipant"
                     android:layout_width="231dp"
                     android:layout_height="match_parent"
                     android:layout_alignParentEnd="true"
@@ -232,14 +204,14 @@
                 android:layout_marginTop="30dp">
 
                 <Button
-                    android:id="@+id/hostGameButton"
+                    android:id="@+id/hostEventButton"
                     android:layout_width="match_parent"
                     android:layout_height="39dp"
                     android:background="#8BC34A"
                     android:text="Host Event" />
 
                 <Button
-                    android:id="@+id/hostGameBackButton"
+                    android:id="@+id/hostEventBackButton"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:backgroundTint="@android:color/white"

@@ -48,7 +48,7 @@ public class MyEventFragment extends Fragment { // AppCompatActivity
         root = inflater.inflate(R.layout.fragment_my_event, container, false);
 
         mAuth = FirebaseAuth.getInstance();
-        currentRef = FirebaseDatabase.getInstance().getReference("gamesList");
+        currentRef = FirebaseDatabase.getInstance().getReference("eventsList");
         listViewGame = root.findViewById(R.id.listViewGame);
         userUID = mAuth.getCurrentUser().getUid();
         eventList = new ArrayList<>();

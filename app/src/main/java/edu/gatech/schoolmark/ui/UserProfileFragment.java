@@ -71,11 +71,13 @@ public class UserProfileFragment extends Fragment implements View.OnClickListene
                 EditText ageTextBox = root.findViewById(R.id.userProfileAge);
                 RadioGroup selectGenderGroup = root.findViewById(R.id.userProfileGender);
                 RadioGroup selectAffiliationGroup = root.findViewById(R.id.userProfileAffiliation);
+                EditText introductionTextBox = root.findViewById(R.id.personalIntroduction);
 
                 if (currentUser != null) {
                     displayNameTextBox.setText(currentUser.getDisplayName());
                     phoneNumberTextBox.setText(Long.toString(currentUser.getPhoneNumber()));
                     ageTextBox.setText(Integer.toString(currentUser.getAge()));
+                    introductionTextBox.setText(currentUser.getIntroduction());
                     if (currentUser.getGender().equals("Male")) {
                         selectGenderGroup.check(R.id.userProfileMaleSelect);
                     } else {
@@ -84,14 +86,15 @@ public class UserProfileFragment extends Fragment implements View.OnClickListene
                     if (currentUser.getIsStudent()) {
                         selectAffiliationGroup.check(R.id.userProfileStudentSelect);
                     } else {
-                        selectAffiliationGroup.check(R.id.userProfileFacultySelect);
+                        selectAffiliationGroup.check(R.id.userProfileStaffSelect);
                     }
                 } else {
-                    displayNameTextBox.setText("Change Me!");
-                    phoneNumberTextBox.setText("1234567890");
-                    ageTextBox.setText("0");
+                    displayNameTextBox.setText("Enter Your Name Here");
+                    phoneNumberTextBox.setText("Enter Your Phone Number Here");
+                    ageTextBox.setText("Enter Your Age here");
                     selectGenderGroup.check(R.id.userProfileMaleSelect);
                     selectAffiliationGroup.check(R.id.userProfileStudentSelect);
+                    introductionTextBox.setText("Enter Your Self Introduction Here");
                 }
             }
 
@@ -122,6 +125,7 @@ public class UserProfileFragment extends Fragment implements View.OnClickListene
         EditText ageTextBox = root.findViewById(R.id.userProfileAge);
         RadioGroup selectGenderGroup = root.findViewById(R.id.userProfileGender);
         RadioGroup selectAffiliationGroup = root.findViewById(R.id.userProfileAffiliation);
+        EditText introductionTextBox = root.findViewById(R.id.personalIntroduction);
 
         if(displayNameTextBox.getText().toString().length() > 15) {
             Toast.makeText(getActivity(), "You can only have up to 15 characters in your name :(",
@@ -142,8 +146,9 @@ public class UserProfileFragment extends Fragment implements View.OnClickListene
             } else {
                 isStudent = false;
             }
+            String introduction = introductionTextBox.getText().toString();
 
-            User currentUser = new User(displayName, age, gender, Long.parseLong(phoneNumber), isStudent);
+            User currentUser = new User(displayName, age, gender, Long.parseLong(phoneNumber), isStudent, introduction);
 
             mDatabase = FirebaseDatabase.getInstance().getReference();
             DatabaseReference userRef = mDatabase.child("userList").child(mAuth.getCurrentUser().getUid());

@@ -8,63 +8,76 @@ import java.util.List;
 
 public class Event {
 
-    private String sport;
-    private Date timeOfGame;
+    private String event;
+    private Date timeOfEvent;
     private String locationTitle;
-    private double locationLatitude;
-    private double locationLongitude;
     private int capacity;
-    private int intensity;
-    private String gameStatus;
+    private String eventStatus;
     private String hostUID;
     private List<String> playerUIDList;
+    private String description;
+    private String name;
 
     private boolean isExclusive;
 
     private boolean isHostStudent;
 
     public Event() {
-        this.sport = "";
-        this.timeOfGame = new Date();
+        this.event = "";
+        this.name = "";
+        this.timeOfEvent = new Date();
         this.locationTitle = "";
-        this.locationLatitude = 0;
-        this.locationLongitude = 0;
         this.capacity = 0;
-        this.intensity = 0;
-        this.gameStatus = "";
+        this.eventStatus = "";
         this.hostUID = "";
         this.playerUIDList = new ArrayList<>();
         this.isExclusive = false;
+        this.description = "";
     }
 
-    public Event(String sport, Date timeOfGame, String locationTitle, double locationLatitude, double locationLongitude, int capacity , int intensity, String gameStatus, String hostUID, ArrayList<String> playerUIDList, boolean isEx) {
-        this.sport = sport;
-        this.timeOfGame = timeOfGame;
+    public Event(String event, Date timeOfGame, String locationTitle, int capacity , String gameStatus, String hostUID, ArrayList<String> playerUIDList, boolean isExclusive, String name, String description) {
+        this.event = event;
+        this.name = name;
+        this.timeOfEvent = timeOfGame;
         this.locationTitle = locationTitle;
-        this.locationLatitude = locationLatitude;
-        this.locationLongitude = locationLongitude;
         this.capacity = capacity;
-        this.intensity = intensity;
-        this.gameStatus = gameStatus;
+        this.eventStatus = gameStatus;
         this.hostUID = hostUID;
         this.playerUIDList = playerUIDList;
-        this.isExclusive = isEx;
+        this.isExclusive = isExclusive;
+        this.description = description;
     }
 
-    public String getSport() {
-        return sport;
+    public String getEvent() {
+        return event;
     }
 
-    public void setSport(String sport) {
-        this.sport = sport;
+    public void setEvent(String sport) {
+        this.event = event;
     }
 
-    public Date getTimeOfGame() {
-        return timeOfGame;
+    public Date getTimeOfEvent() {
+        return timeOfEvent;
     }
 
-    public void setTimeOfGame(Date timeOfGame) {
-        this.timeOfGame = timeOfGame;
+    public void setTimeOfEvent(Date timeOfGame) {
+        this.timeOfEvent = timeOfEvent;
+    }
+
+    public String getEventName() {
+        return name;
+    }
+
+    public void setEventName(String description) {
+        this.name = name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public String getLocationTitle() {
@@ -75,41 +88,14 @@ public class Event {
         this.locationTitle = locationTitle;
     }
 
-    public double getLocationLatitude() {
-        return locationLatitude;
-    }
-
-    public void setLocationLatitude(double locationLatitude) {
-        this.locationLatitude = locationLatitude;
-    }
-
-    public double getLocationLongitude() {
-        return locationLongitude;
-    }
-
-    public void setLocationLongitude(double locationLongitude) {
-        this.locationLongitude = locationLongitude;
-    }
-
     public int getCapacity() { return capacity; }
 
     public void setCapacity(int capacity) { this.capacity = capacity; }
 
-    public int getIntensity() {
-        return intensity;
+    public String getEventStatus() {
+        return eventStatus;
     }
 
-    public void setIntensity(int intensity) {
-        this.intensity = intensity;
-    }
-
-    public String getGameStatus() {
-        return gameStatus;
-    }
-
-    public void setGameStatus(String gameStatus) {
-        this.gameStatus = gameStatus;
-    }
 
     public String getHostUID() {
         return hostUID;
@@ -147,7 +133,7 @@ public class Event {
 
     @Override
     public String toString() {
-        return locationTitle + " " + sport + " " + hostUID;
+        return locationTitle + " " + event + " " + hostUID;
     }
 
     @Override
@@ -155,14 +141,11 @@ public class Event {
         if (!(o instanceof Event)) { return false; }
         Event g = (Event) o;
 
-        if (sport.equals(g.getSport())
-                && timeOfGame.equals(g.getTimeOfGame())
+        if (event.equals(g.getEvent())
+                && timeOfEvent.equals(g.getTimeOfEvent())
                 && locationTitle.equals(g.getLocationTitle())
-                && locationLatitude == g.getLocationLatitude()
-                && locationLongitude == g.getLocationLongitude()
                 && capacity == g.getCapacity()
-                && intensity == g.getIntensity()
-                && gameStatus.equals(g.getGameStatus())
+                && eventStatus.equals(g.getEventStatus())
                 && hostUID.equals(g.getHostUID())
                 && playerUIDList.equals(g.getPlayerUIDList())) { return true; }
         return false;

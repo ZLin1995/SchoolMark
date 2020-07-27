@@ -1,9 +1,7 @@
 package edu.gatech.schoolmark.ui;
 
-import android.app.AlertDialog;
 import android.app.Fragment;
 import android.app.FragmentManager;
-import android.content.DialogInterface;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -43,14 +41,13 @@ public class EventListFragment extends Fragment implements AdapterView.OnItemSel
 
     private static final String TAG = "Join Activity";
 
-    private final String sportsListURL = "sportsList/";
-    private final String gamesListURL = "gamesList/";
+    private final String sportsListURL = "typesList/";
+    private final String eventsListURL = "eventsList/";
 
 
     private final String spSel = "Event Type";
     private final String loSel = "Location";
-    private final String inSel = "Max Capacity";
-    private final String plSel = "Any Approval";
+    private final String plSel = "All Participant";
 
 
     private boolean gamesExist;
@@ -73,7 +70,6 @@ public class EventListFragment extends Fragment implements AdapterView.OnItemSel
     List<String> sport;
     List<String> location;
     List<String> player;
-    List<String> intensity;
     List<Location> lSportsLocations;
 
     String spSelected;
@@ -97,7 +93,7 @@ public class EventListFragment extends Fragment implements AdapterView.OnItemSel
 
         mAuth = FirebaseAuth.getInstance();
         mDatabase = FirebaseDatabase.getInstance().getReference();
-        currentRef = FirebaseDatabase.getInstance().getReference(gamesListURL);
+        currentRef = FirebaseDatabase.getInstance().getReference(eventsListURL);
         listViewGame = root.findViewById(R.id.listViewGame);
         userUID = mAuth.getCurrentUser().getUid();
         eventList = new ArrayList<>();
@@ -105,7 +101,6 @@ public class EventListFragment extends Fragment implements AdapterView.OnItemSel
         sportSpinner = root.findViewById(R.id.sport_spinner);
         locationSpinner = root.findViewById(R.id.location_spinner);
         playerSpinner = root.findViewById(R.id.player_spinner);
-        intensitySpinner = root.findViewById(R.id.intensity_spinner);
 
         joinEvent = root.findViewById(R.id.createEvent);
         joinEvent.setOnClickListener(new View.OnClickListener() {
@@ -120,20 +115,17 @@ public class EventListFragment extends Fragment implements AdapterView.OnItemSel
         sport = new ArrayList<String>();
         location = new ArrayList<String>();
         player = new ArrayList<String>();
-        intensity = new ArrayList<String>();
         lSportsLocations = new ArrayList<Location>();
 
         //populating the spinners
         spSelected = spSel;
         loSelected = loSel;
-        inSelected = inSel;
         plSelected = plSel;
 
 
         sport.add(spSel);
         location.add(loSel);
         player.add(plSel);
-        intensity.add(inSel);
 
         DatabaseReference userRef = mDatabase.child("userList").child(mAuth.getCurrentUser().getUid());
         userRef.addValueEventListener(new ValueEventListener() {
@@ -145,7 +137,7 @@ public class EventListFragment extends Fragment implements AdapterView.OnItemSel
                         player.add("Students Only");
                         isStudent = true;
                     } else {
-                        player.add("Faculty Only");
+                        player.add("Staff Only");
                         isStudent = false;
                     }
                 }
@@ -157,14 +149,8 @@ public class EventListFragment extends Fragment implements AdapterView.OnItemSel
             }
         });
 
-        intensity.add("10");
-        intensity.add("20");
-        intensity.add("30");
-        intensity.add("40");
-        intensity.add("50+");
-
-        // Add sports and locations to the spinners
-        // Get EventType List and Locations List from the Database
+        // Add types and locations to the spinners
+        // Get Types List and Locations List from the Database
         try {
             currentRef = mDatabase.child(sportsListURL);
             currentRef.addValueEventListener(new ValueEventListener() {
@@ -177,12 +163,10 @@ public class EventListFragment extends Fragment implements AdapterView.OnItemSel
 
                     // This Adds all possible sports to the sport list.
                     for (Location s: lSportsLocations) {
-                        sport.add(s.getGame());
+                        sport.add(s.getEvent());
                     }
 
                 }
-
-
 
                 @Override
                 public void onCancelled(DatabaseError databaseError) {
@@ -213,14 +197,7 @@ public class EventListFragment extends Fragment implements AdapterView.OnItemSel
         playerSpinner.setAdapter(playerAdapter);
 
 
-        ArrayAdapter<String> intensityAdapter = new ArrayAdapter<String>(getActivity(),
-                android.R.layout.simple_spinner_item, intensity);
-        intensityAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        intensitySpinner.setAdapter(intensityAdapter);
-
-
         sportSpinner.setOnItemSelectedListener(this);
-        intensitySpinner.setOnItemSelectedListener(this);
         locationSpinner.setOnItemSelectedListener(this);
         playerSpinner.setOnItemSelectedListener(this);
 
@@ -232,7 +209,7 @@ public class EventListFragment extends Fragment implements AdapterView.OnItemSel
     @Override
     public void onStart() {
         super.onStart();
-        currentRef = mDatabase.child(gamesListURL);
+        currentRef = mDatabase.child(eventsListURL);
         currentRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -253,7 +230,6 @@ public class EventListFragment extends Fragment implements AdapterView.OnItemSel
                     EventListAdapter adapter = new EventListAdapter(getActivity(), eventList, dataSnapshot);
                     listViewGame.setAdapter(adapter);
                 }
-                isGameListEmpty();
             }
 
             @Override
@@ -264,30 +240,6 @@ public class EventListFragment extends Fragment implements AdapterView.OnItemSel
 
     }
 
-
-    private void isGameListEmpty() {
-        if (!gamesExist) {
-            AlertDialog.Builder builder;
-            builder = new AlertDialog.Builder(getActivity());
-            // AlertDialog alert = builder.create();
-            builder.setTitle("There aren't any games available right now")
-                    .setMessage("Would you like to host your own?")
-                    .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int which) {
-                            // go host a game
-                            hostGame();
-                        }
-                    })
-                    .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int which) {
-                            // go back to home screen
-                            homeScreen();
-                        }
-                    })
-                    .setIconAttribute(android.R.attr.alertDialogIcon)
-                    .show();
-        }
-    }
 
     private void hostGame() {
         Fragment fragment = new HostEventFragment();
@@ -327,10 +279,6 @@ public class EventListFragment extends Fragment implements AdapterView.OnItemSel
             if (parent.getId() == playerSpinner.getId()) {
                 plSelected = temp;
             }
-            if (parent.getId() == intensitySpinner.getId()) {
-                inSelected = temp;
-                isExclusive = !temp.equals(plSel);
-            }
 
         }
 
@@ -343,7 +291,6 @@ public class EventListFragment extends Fragment implements AdapterView.OnItemSel
     public void onNothingSelected(AdapterView<?> parent) {
         spSelected = spSel;
         loSelected = loSel;
-        inSelected = inSel;
         plSelected = plSel;
     }
 
@@ -355,9 +302,8 @@ public class EventListFragment extends Fragment implements AdapterView.OnItemSel
     }
 
     private boolean fitsFilter(Event g) {
-        if ((g.getSport().equals(spSelected) || spSelected.equals(spSel))
-            && (g.getLocationTitle().equals(loSelected) || loSelected.equals(loSel))
-            && (inSelected.equals(Integer.toString(g.getIntensity())) || inSelected.equals(inSel))) {
+        if ((g.getEvent().equals(spSelected) || spSelected.equals(spSel))
+            && (g.getLocationTitle().equals(loSelected) || loSelected.equals(loSel))) {
             if ((isExclusive && (isStudent == g.getIsHostStudent())) || plSelected.equals(plSel)) {
                 return true;
             }

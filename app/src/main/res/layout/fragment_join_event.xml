@@ -35,11 +35,6 @@
             android:layout_height="match_parent"
             android:layout_weight="0.03" />
 
-        <Spinner
-            android:id="@+id/intensity_spinner"
-            android:layout_width="100dp"
-            android:layout_height="match_parent"
-            android:layout_weight="0.03" />
     </LinearLayout>
 
 

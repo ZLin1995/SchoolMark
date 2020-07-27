@@ -40,6 +40,7 @@ import edu.gatech.schoolmark.model.Event;
 import edu.gatech.schoolmark.model.Location;
 import edu.gatech.schoolmark.model.User;
 
+
 public class HostEventFragment extends Fragment implements AdapterView.OnItemSelectedListener, View.OnClickListener {
 
     private FirebaseAuth mAuth;
@@ -49,7 +50,7 @@ public class HostEventFragment extends Fragment implements AdapterView.OnItemSel
 
     private List<String> sportsList;
     private List<Location> locationList;
-    private ArrayAdapter<String> sportsLocationsAdapter;
+    private ArrayAdapter<String> typesLocationsAdapter;
     private ArrayList<String> playersList;
 
     private TimePicker timePicker;
@@ -58,13 +59,14 @@ public class HostEventFragment extends Fragment implements AdapterView.OnItemSel
     private Spinner sportSpinner;
     private String sportSelected;
     private String locationSelected;
-    static java.util.Calendar cal = java.util.Calendar.getInstance();
-    private EditText intensity;
     private EditText numberOfPlayers;
+    private EditText eventName;
+    private EditText eventDescription;
+    static java.util.Calendar cal = java.util.Calendar.getInstance();
     private CheckBox checkBox;
 
-    private final String sportsListURL = "sportsList/";
-    private final String locationListURL = "sportsList/locations/";
+    private final String typesListURL = "typesList/";
+    private final String locationListURL = "typesList/locations/";
 
     private boolean isHostStudent;
 
@@ -73,6 +75,7 @@ public class HostEventFragment extends Fragment implements AdapterView.OnItemSel
     public HostEventFragment() {
         //required empty constructor
     }
+
 
     @Nullable
     @Override
@@ -84,8 +87,8 @@ public class HostEventFragment extends Fragment implements AdapterView.OnItemSel
 
         Button datePickerButton = root.findViewById(R.id.datePickButton);
         Button timePickerButton = root.findViewById(R.id.timePickButton);
-        Button hostButton = root.findViewById(R.id.hostGameButton);
-        Button hostBackButton = root.findViewById(R.id.hostGameBackButton);
+        Button hostButton = root.findViewById(R.id.hostEventButton);
+        Button hostBackButton = root.findViewById(R.id.hostEventBackButton);
 
         datePickerButton.setOnClickListener(this);
         timePickerButton.setOnClickListener(this);
@@ -99,12 +102,13 @@ public class HostEventFragment extends Fragment implements AdapterView.OnItemSel
         sportsList = new ArrayList<>();
         playersList = new ArrayList<>();
         locationSpinner = root.findViewById(R.id.locationSpinner);
-        intensity = root.findViewById(R.id.currentParticipant);
         numberOfPlayers = root.findViewById(R.id.maxCapacity);
-        checkBox = root.findViewById(R.id.approvalCheckBox);
+        eventName = root.findViewById(R.id.eventName);
+        eventDescription = root.findViewById(R.id.eventDescription);
+        checkBox = root.findViewById(R.id.checkBox);
 
         try {
-            currentRef = mDatabase.child(sportsListURL);
+            currentRef = mDatabase.child(typesListURL);
             currentRef.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
@@ -113,7 +117,7 @@ public class HostEventFragment extends Fragment implements AdapterView.OnItemSel
                     }
 
                     for (Location s: locationList) {
-                        sportsList.add(s.getGame());
+                        sportsList.add(s.getEvent());
                     }
                     attachListenerToSpinner();
 
@@ -136,7 +140,7 @@ public class HostEventFragment extends Fragment implements AdapterView.OnItemSel
                             checkBox.setText("Students Only");
                             isHostStudent = true;
                         } else {
-                            checkBox.setText("Faculty Only");
+                            checkBox.setText("Staff Only");
                             isHostStudent = false;
                         }
                     } else {
@@ -167,9 +171,9 @@ public class HostEventFragment extends Fragment implements AdapterView.OnItemSel
             showDatePicker(v);
         } else if (v.getId() == R.id.timePickButton) {
             showTimePicker(v);
-        } else if (v.getId() == R.id.hostGameButton) {
-            hostNewGame(v);
-        } else if (v.getId() == R.id.hostGameBackButton) {
+        } else if (v.getId() == R.id.hostEventButton) {
+            hostNewEvent(v);
+        } else if (v.getId() == R.id.hostEventBackButton) {
             cancelGame(v);
         }
     }
@@ -177,8 +181,8 @@ public class HostEventFragment extends Fragment implements AdapterView.OnItemSel
     private void attachListenerToSpinner() {
         // Log.i(TAG, "Current Size of sportsLocationList: " + locationList.size());
         // Log.i(TAG, "Current Size of sportsList: " + sportsList.size());
-        // Populate the EventType dropdown with the EventType pulled from the database
-        sportSpinner = root.findViewById(R.id.sportSpinner);
+        // Populate the Types dropdown with the Types pulled from the database
+        sportSpinner = root.findViewById(R.id.eventSpinner);
         ArrayAdapter<String> sportsAdapter = new ArrayAdapter<>(
                 getActivity(), android.R.layout.simple_spinner_item, sportsList);
         sportsAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -194,36 +198,27 @@ public class HostEventFragment extends Fragment implements AdapterView.OnItemSel
 
     }
 
-
-
-    public void hostNewGame(View view) {
+    public void hostNewEvent(View view) {
         playersList.add(mAuth.getCurrentUser().getUid());
         Event newEvent = new Event();
         newEvent.setPlayerUIDList(playersList);
         newEvent.setHostUID(mAuth.getCurrentUser().getUid());
-        newEvent.setSport(sportSelected);
+        newEvent.setEvent(sportSelected);
         newEvent.setLocationTitle(locationSelected);
         newEvent.setIsExclusive(checkBox.isChecked());
         newEvent.setIsHostStudent(isHostStudent);
+        newEvent.setTimeOfEvent(cal.getTime());
+        newEvent.setEventName(eventName.getText().toString());
+        String value = numberOfPlayers.getText().toString();
+        int capacity = Integer.parseInt(value);
+        newEvent.setCapacity(capacity);
+        newEvent.setDescription(eventDescription.getText().toString());
 
-//        if (intensity.getRating() > 0) {
-//            newEvent.setIntensity((int) intensity.getRating());
-//        }
-//        if (numberOfPlayers.getValue() > 0) {
-//            newEvent.setCapacity(numberOfPlayers.getValue());
-//        }
-        // storing the date from Calendar object
-        // MONTH IS STORED FROM 0-11, ADD 1 WHEN CALLED FROM DATABASE
-        // WHY NOT JUST ADD 1 HERE DUDE
-        // Because the Calendar class itself is what converts 1-12 to 0-11.
-        // We are giving inputs from 1-12 already when we select the month from the picker.
-        newEvent.setTimeOfGame(cal.getTime());
-
-        currentRef = mDatabase.child("gamesList");
+        currentRef = mDatabase.child("eventsList");
         currentRef.push().setValue(newEvent);
 
         Toast.makeText(getActivity(),
-                "Your game was hosted!",
+                "Your event was hosted!",
                 Toast.LENGTH_SHORT).show();
 
         Fragment fragment = new EventListFragment();
@@ -250,16 +245,16 @@ public class HostEventFragment extends Fragment implements AdapterView.OnItemSel
             Log.i(TAG, (String) parent.getItemAtPosition(pos));
             sportSelected = currentItem;
             for (Location s: locationList) {
-                Log.i(TAG, "iterating through SportsLocation in onItemSelected: " + s.getGame());
+                Log.i(TAG, "iterating through SportsLocation in onItemSelected: " + s.getEvent());
                 // SportsLocation equals has been made to accept Strings and Location
                 if (s.equals(currentItem)) {
                     // Populate location spinner based on the sport selected
                     //ArrayAdapter<String> adapter = new ArrayAdapter<>(
                     //        this, android.R.layout.simple_spinner_item, s.getLocations());
-                    ArrayAdapter<String> sportsLocationsAdapter = new ArrayAdapter<>(
+                    ArrayAdapter<String> typesLocationsAdapter = new ArrayAdapter<>(
                             getActivity(), android.R.layout.simple_spinner_item, s.getLocations());
-                    sportsLocationsAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                    locationSpinner.setAdapter(sportsLocationsAdapter);
+                    typesLocationsAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                    locationSpinner.setAdapter(typesLocationsAdapter);
                     locationSelected = (String) locationSpinner.getSelectedItem();
                 }
             }

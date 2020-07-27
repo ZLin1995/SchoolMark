@@ -194,11 +194,11 @@
                             android:text="Student" />
 
                         <RadioButton
-                            android:id="@+id/userProfileFacultySelect"
+                            android:id="@+id/userProfileStaffSelect"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:text="Faculty" />
+                            android:text="Staff" />
 
                     </RadioGroup>
 
@@ -218,7 +218,7 @@
                     android:textSize="18dp" />
 
                 <EditText
-                    android:id="@+id/personalProfile"
+                    android:id="@+id/personalIntroduction"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"

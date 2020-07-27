@@ -9,14 +9,16 @@ public class User {
     private String gender;
     private Long phoneNumber;
     private boolean isStudent;
+    private String introduction;
 
-    public User(String displayName, int age, String gender, Long phoneNumber, boolean isStudent) {
+    public User(String displayName, int age, String gender, Long phoneNumber, boolean isStudent, String introduction) {
 
         this.displayName = displayName;
         this.age = age;
         this.gender = gender;
         this.phoneNumber = phoneNumber;
         this.isStudent = isStudent;
+        this.introduction = introduction;
 
     }
 
@@ -50,6 +52,10 @@ public class User {
 
     public Long getPhoneNumber() {
         return phoneNumber;
+    }
+
+    public String getIntroduction() {
+        return introduction;
     }
 
     public void setPhoneNumber(Long phoneNumber) {
