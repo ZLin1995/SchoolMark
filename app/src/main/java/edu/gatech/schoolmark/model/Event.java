@@ -15,8 +15,9 @@ public class Event {
     private String eventStatus;
     private String hostUID;
     private List<String> playerUIDList;
-    private String description;
     private String name;
+    private String description;
+
 
     private boolean isExclusive;
 
@@ -68,7 +69,7 @@ public class Event {
         return name;
     }
 
-    public void setEventName(String description) {
+    public void setEventName(String name) {
         this.name = name;
     }
 

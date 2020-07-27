@@ -29,7 +29,7 @@ import java.util.Map;
 
 import edu.gatech.schoolmark.R;
 import edu.gatech.schoolmark.model.Event;
-import edu.gatech.schoolmark.model.Location;
+import edu.gatech.schoolmark.model.EventsLocations;
 import edu.gatech.schoolmark.model.User;
 
 
@@ -41,12 +41,12 @@ public class EventListFragment extends Fragment implements AdapterView.OnItemSel
 
     private static final String TAG = "Join Activity";
 
-    private final String sportsListURL = "typesList/";
+    private final String typesListURL = "typesList/";
     private final String eventsListURL = "eventsList/";
 
 
     private final String spSel = "Event Type";
-    private final String loSel = "Location";
+    private final String loSel = "EventsLocations";
     private final String plSel = "All Participant";
 
 
@@ -70,7 +70,7 @@ public class EventListFragment extends Fragment implements AdapterView.OnItemSel
     List<String> sport;
     List<String> location;
     List<String> player;
-    List<Location> lSportsLocations;
+    List<EventsLocations> lSportsEventsLocations;
 
     String spSelected;
     String loSelected;
@@ -115,7 +115,7 @@ public class EventListFragment extends Fragment implements AdapterView.OnItemSel
         sport = new ArrayList<String>();
         location = new ArrayList<String>();
         player = new ArrayList<String>();
-        lSportsLocations = new ArrayList<Location>();
+        lSportsEventsLocations = new ArrayList<EventsLocations>();
 
         //populating the spinners
         spSelected = spSel;
@@ -152,17 +152,17 @@ public class EventListFragment extends Fragment implements AdapterView.OnItemSel
         // Add types and locations to the spinners
         // Get Types List and Locations List from the Database
         try {
-            currentRef = mDatabase.child(sportsListURL);
+            currentRef = mDatabase.child(typesListURL);
             currentRef.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
                     for (DataSnapshot snapshotChunk: dataSnapshot.getChildren()) {
-                        lSportsLocations
-                                .add(snapshotChunk.getValue(Location.class));
+                        lSportsEventsLocations
+                                .add(snapshotChunk.getValue(EventsLocations.class));
                     }
 
                     // This Adds all possible sports to the sport list.
-                    for (Location s: lSportsLocations) {
+                    for (EventsLocations s: lSportsEventsLocations) {
                         sport.add(s.getEvent());
                     }
 
@@ -264,8 +264,8 @@ public class EventListFragment extends Fragment implements AdapterView.OnItemSel
                 location.clear();
                 location.add(loSel);
                 // If they selected a sport, then fill that spinner with a list of valid locations
-                for (Location s: lSportsLocations) {
-                    // Log.v(TAG, "TEMP: " + temp + " Location: " + s.toString() + " comparison: " + (s.equals(temp)));
+                for (EventsLocations s: lSportsEventsLocations) {
+                    // Log.v(TAG, "TEMP: " + temp + " EventsLocations: " + s.toString() + " comparison: " + (s.equals(temp)));
                     if (s.equals(temp)) {
                         location.addAll(s.getLocations());
                     }
