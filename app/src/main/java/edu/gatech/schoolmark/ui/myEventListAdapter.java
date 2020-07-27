@@ -48,22 +48,24 @@ public class myEventListAdapter extends ArrayAdapter<Event> {
         mAuth = FirebaseAuth.getInstance();
         LayoutInflater inflater = context.getLayoutInflater();
         View listViewItem = inflater.inflate(R.layout.my_event_list_layout, null, true);
-        TextView listSport = listViewItem.findViewById(R.id.listEvent);
+        TextView listEventName = listViewItem.findViewById(R.id.listEventName);
+        TextView listEventType = listViewItem.findViewById(R.id.listEventType);
         TextView listLocation = listViewItem.findViewById(R.id.listLocation);
         TextView listTime = listViewItem.findViewById(R.id.listTime);
         TextView listDate = listViewItem.findViewById(R.id.listDate);
         TextView listCapacity = listViewItem.findViewById(R.id.listCapacity);
-        Button quitGame = listViewItem.findViewById(R.id.quitGame);
+        Button quitEvent = listViewItem.findViewById(R.id.quitEvent);
 
         final java.text.DateFormat dateFormat = android.text.format.DateFormat.getDateFormat(getContext());
         final java.text.DateFormat timeFormat = android.text.format.DateFormat.getTimeFormat(getContext());
         final Event event = eventList.get(position);
-        String gameKey = "";
+        String eventKey = "";
 
 
 
         cal.setTime(event.getTimeOfEvent());
-        listSport.setText(event.getEvent());
+        listEventName.setText(event.getEventName());
+        listEventType.setText(event.getEvent());
         listTime.setText(timeFormat.format(event.getTimeOfEvent()));
         listDate.setText(dateFormat.format(event.getTimeOfEvent()));
         listLocation.setText(event.getLocationTitle());
@@ -76,12 +78,12 @@ public class myEventListAdapter extends ArrayAdapter<Event> {
         for (DataSnapshot gameSnapshot : eventsList.getChildren()) {
             Event g = gameSnapshot.getValue(Event.class);
             if (g.equals(event)) {
-                gameKey = gameSnapshot.getKey();
+                eventKey = gameSnapshot.getKey();
             }
         }
 
-        final String game_key = gameKey;
-        quitGame.setOnClickListener(new View.OnClickListener() {
+        final String game_key = eventKey;
+        quitEvent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 List<String> editedList = event.getPlayerUIDList();
@@ -104,16 +106,17 @@ public class myEventListAdapter extends ArrayAdapter<Event> {
             @Override
             public void onClick(View view) {
                 Bundle bundle = new Bundle();
-                bundle.putString("sport", event.getEvent());
+                bundle.putString("eventName", event.getEventName());
+                bundle.putString("eventType", event.getEvent());
                 bundle.putString("location", event.getLocationTitle());
                 bundle.putString("time", timeFormat.format(event.getTimeOfEvent()));
                 bundle.putString("date", dateFormat.format(event.getTimeOfEvent()));
                 bundle.putString("hostID", event.getHostUID());
-                bundle.putString("gameID", game_key);
+                bundle.putString("eventID", game_key);
                 Fragment fragment = new EventDetailFragment();
                 fragment.setArguments(bundle);
                 FragmentManager fm = ((Activity)context).getFragmentManager();
-                fm.beginTransaction().replace(R.id.home_frame, fragment).commit();
+                fm.beginTransaction().replace(R.id.home_frame, fragment).addToBackStack( "tag" ).commit();
             }
         });
 

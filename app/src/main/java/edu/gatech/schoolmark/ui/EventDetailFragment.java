@@ -2,6 +2,7 @@ package edu.gatech.schoolmark.ui;
 
 import android.app.Activity;
 import android.app.Fragment;
+import android.content.Intent;
 import android.location.Location;
 import android.location.LocationListener;
 import android.os.Bundle;
@@ -33,7 +34,8 @@ public class EventDetailFragment extends Fragment implements  LocationListener{
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         root = inflater.inflate(R.layout.fragment_event_detail, container, false);
 
-        TextView listSport = root.findViewById(R.id.detailSport);
+        TextView listEventName = root.findViewById(R.id.detailEventName);
+        TextView listEventType = root.findViewById(R.id.detailEventType);
         TextView listLocation = root.findViewById(R.id.detailLocation);
         TextView listTime = root.findViewById(R.id.detailTime);
         TextView listDate = root.findViewById(R.id.detailDate);
@@ -44,14 +46,15 @@ public class EventDetailFragment extends Fragment implements  LocationListener{
         mDatabase = FirebaseDatabase.getInstance().getReference();
 
         Bundle args = getArguments();
-        String sportType = args.getString("sport");
+        String eventName = args.getString("eventName");
+        String eventType = args.getString("eventType");
         String location = args.getString("location");
         String time = args.getString("time");
         String date = args.getString("date");
         String hostID = args.getString("hostID");
-        final String gameID = args.getString("gameID");
 
-        listSport.setText(sportType);
+        listEventName.setText(eventName);
+        listEventType.setText(eventType);
         listTime.setText(time);
         listDate.setText(date);
         listLocation.setText(location);

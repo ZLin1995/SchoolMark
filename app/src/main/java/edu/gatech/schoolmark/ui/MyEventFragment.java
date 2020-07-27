@@ -59,7 +59,7 @@ public class MyEventFragment extends Fragment { // AppCompatActivity
             public void onClick(View view) {
                 Fragment fragment = new HostEventFragment();
                 FragmentManager fm = getFragmentManager();
-                fm.beginTransaction().replace(R.id.home_frame, fragment).commit();
+                fm.beginTransaction().replace(R.id.home_frame, fragment).addToBackStack( "tag" ).commit();
             }
         });
 

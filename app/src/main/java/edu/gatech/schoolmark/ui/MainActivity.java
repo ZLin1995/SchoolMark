@@ -89,22 +89,22 @@ public class MainActivity extends AppCompatActivity {
         if (item.equals("Event List")) {
             Fragment fragment = new EventListFragment();
             FragmentManager fm = getFragmentManager();
-            fm.beginTransaction().replace(R.id.home_frame, fragment).commit();
+            fm.beginTransaction().replace(R.id.home_frame, fragment).addToBackStack( "tag1" ).commit();
             mDrawerLayout.closeDrawer(mDrawerList);
         } else if (item.equals("Profile")) {
             Fragment fragment = new UserProfileFragment();
             FragmentManager fm = getFragmentManager();
-            fm.beginTransaction().replace(R.id.home_frame, fragment).commit();
+            fm.beginTransaction().replace(R.id.home_frame, fragment).addToBackStack( "tag2" ).commit();
             mDrawerLayout.closeDrawer(mDrawerList);
         } else if(item.equals("My Events")) {
             Fragment fragment = new MyEventFragment();
             FragmentManager fm = getFragmentManager();
-            fm.beginTransaction().replace(R.id.home_frame, fragment).commit();
+            fm.beginTransaction().replace(R.id.home_frame, fragment).addToBackStack( "tag3" ).commit();
             mDrawerLayout.closeDrawer(mDrawerList);
         } else if (item.equals("Contact Us")) {
             Fragment fragment = new ContactUsFragment();
             FragmentManager fm = getFragmentManager();
-            fm.beginTransaction().replace(R.id.home_frame, fragment).commit();
+            fm.beginTransaction().replace(R.id.home_frame, fragment).addToBackStack( "tag4" ).commit();
             mDrawerLayout.closeDrawer(mDrawerList);
         } else if (item.equals("Logout")) {
             FirebaseAuth.getInstance().signOut();

@@ -7,21 +7,29 @@
     android:layout_alignParentTop="true">
 
     <TextView
-        android:id="@+id/listEvent"
+        android:id="@+id/listEventName"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:layout_alignEnd="@+id/listLocation"
+        android:layout_alignEnd="@+id/listEventType"
         android:layout_alignParentTop="true"
-        android:layout_alignRight="@+id/listLocation"
+        android:layout_alignRight="@+id/listEventType"
         android:text="TextView"
         android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/listEventType"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/listEventName"
+        android:text="TextView"
         android:textStyle="bold" />
 
     <TextView
         android:id="@+id/listLocation"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/listEvent"
+        android:layout_below="@+id/listEventType"
         android:text="TextView" />
 
     <TextView
@@ -49,32 +57,10 @@
         android:layout_below="@+id/listDate"
         android:text="TextView" />
 
-<!--    <RelativeLayout-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="48dp"-->
-<!--        android:layout_alignParentLeft="true"-->
-<!--        android:layout_alignParentStart="true"-->
-<!--        android:layout_alignParentTop="true">-->
 
-<!--        <TextView-->
-<!--            android:id="@+id/listIntensity"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_alignParentLeft="true"-->
-<!--            android:layout_centerInParent="true"-->
-<!--            android:text="Intensity" />-->
-
-<!--        <RatingBar-->
-<!--            android:id="@+id/listIntensityBar"-->
-<!--            android:layout_width="240dp"-->
-<!--            android:layout_height="50dp"-->
-<!--            android:layout_centerVertical="true"-->
-<!--            android:layout_toEndOf="@+id/listIntensity"-->
-<!--            android:layout_toRightOf="@+id/listIntensity"-->
-<!--            android:isIndicator="true" />-->
 
     <Button
-        android:id="@+id/quitGame"
+        android:id="@+id/quitEvent"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
