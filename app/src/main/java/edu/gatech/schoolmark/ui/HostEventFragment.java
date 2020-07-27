@@ -1,13 +1,11 @@
 package edu.gatech.schoolmark.ui;
 
-import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.TimePickerDialog;
-import android.content.DialogInterface;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -200,7 +198,7 @@ public class HostEventFragment extends Fragment implements AdapterView.OnItemSel
     public void hostNewGame(View view) {
         playersList.add(mAuth.getCurrentUser().getUid());
         Event newGame = new Event();
-        newGame.setPlayerUIDList(playersList);
+        newGame.setParticipantUIDList(playersList);
         newGame.setHostUID(mAuth.getCurrentUser().getUid());
         newGame.setEvent(eventSelected);
         newGame.setLocationTitle(locationSelected);

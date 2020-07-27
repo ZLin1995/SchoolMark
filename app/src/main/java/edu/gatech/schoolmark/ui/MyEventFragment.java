@@ -79,7 +79,7 @@ public class MyEventFragment extends Fragment { // AppCompatActivity
                 for (DataSnapshot gameSnapshot : dataSnapshot.getChildren()) {
                     Event event = gameSnapshot.getValue(Event.class);
                     //Log.i(TAG, gam)
-                    if (event.getPlayerUIDList().contains(userUID)) {
+                    if (event.getParticipantUIDList().contains(userUID)) {
                         eventList.add(event);
                     }
                 }

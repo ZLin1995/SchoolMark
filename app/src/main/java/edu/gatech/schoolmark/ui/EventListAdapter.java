@@ -84,9 +84,9 @@ public class EventListAdapter extends ArrayAdapter<Event> {
         joinGame.setOnClickListener(new View.OnClickListener() {
              @Override
              public void onClick(View view) {
-                 List<String> editedList = event.getPlayerUIDList();
+                 List<String> editedList = event.getParticipantUIDList();
                  editedList.add(mAuth.getCurrentUser().getUid());
-                 event.setPlayerUIDList((ArrayList<String>) editedList);
+                 event.setParticipantUIDList((ArrayList<String>) editedList);
                  mDatabase.child("eventsList").child(event_key).child("playerUIDList").setValue(editedList);
                  String toastText = "You have successfully joined the " + event.getEvent() + " event on " + event.getTimeOfEvent().toString().substring(0, 10);
                  Toast temp = Toast.makeText(context, toastText, Toast.LENGTH_LONG);

@@ -38,11 +38,11 @@ public class ContactUsFragment extends Fragment implements View.OnClickListener 
     @Override
     public void onClick(View view) {
         String comment = ((EditText) root.findViewById(R.id.editText_comment)).getText().toString();
-        DatabaseReference commentRef = mDatabase.child("commentList").child(mAuth.getCurrentUser().getUid()).child(Integer.toString(comment.hashCode()));
+        DatabaseReference commentRef = mDatabase.child("feedbackList").child(mAuth.getCurrentUser().getUid()).child(Integer.toString(comment.hashCode()));
 
         commentRef.setValue(comment);
 
-        Toast.makeText(getActivity(), "Thanks for the feedback!",
+        Toast.makeText(getActivity(), "Thanks for the feedback, we will getback to you asap!",
                 Toast.LENGTH_SHORT).show();
         Fragment fragment = new EventListFragment();
         FragmentManager fm = getFragmentManager();

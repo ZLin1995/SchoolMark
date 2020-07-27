@@ -24,24 +24,6 @@
 
     </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:orientation="horizontal">
-
-        <Spinner
-            android:id="@+id/player_spinner"
-            android:layout_width="100dp"
-            android:layout_height="match_parent"
-            android:layout_weight="0.03" />
-
-        <Spinner
-            android:id="@+id/capacity_spinner"
-            android:layout_width="100dp"
-            android:layout_height="match_parent"
-            android:layout_weight="0.03" />
-    </LinearLayout>
-
 
     <FrameLayout xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"

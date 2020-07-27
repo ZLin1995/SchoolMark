@@ -69,7 +69,7 @@ public class myEventListAdapter extends ArrayAdapter<Event> {
         listTime.setText(timeFormat.format(event.getTimeOfEvent()));
         listDate.setText(dateFormat.format(event.getTimeOfEvent()));
         listLocation.setText(event.getLocationTitle());
-        listCapacity.setText("Capacity: " + event.getPlayerUIDList().size() + " / " + event.getCapacity());
+        listCapacity.setText("Capacity: " + event.getParticipantUIDList().size() + " / " + event.getCapacity());
 
         mDatabase = FirebaseDatabase.getInstance().getReference();
         currentRef = mDatabase.child("eventsList");
@@ -86,10 +86,10 @@ public class myEventListAdapter extends ArrayAdapter<Event> {
         quitEvent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                List<String> editedList = event.getPlayerUIDList();
+                List<String> editedList = event.getParticipantUIDList();
                 String user = mAuth.getCurrentUser().getUid();
                 editedList.remove(user);
-                event.setPlayerUIDList((ArrayList<String>) editedList);
+                event.setParticipantUIDList((ArrayList<String>) editedList);
                 if (editedList.size() == 0 || event.getHostUID().equals(user)) {
                     mDatabase.child("eventsList").child(event_key).removeValue();
                 } else {

@@ -14,7 +14,7 @@ public class Event {
     private int capacity;
     private String eventStatus;
     private String hostUID;
-    private List<String> playerUIDList;
+    private List<String> participantUIDList;
     private String name;
     private String description;
 
@@ -31,12 +31,12 @@ public class Event {
         this.capacity = 0;
         this.eventStatus = "";
         this.hostUID = "";
-        this.playerUIDList = new ArrayList<>();
+        this.participantUIDList = new ArrayList<>();
         this.isExclusive = false;
         this.description = "";
     }
 
-    public Event(String event, Date timeOfGame, String locationTitle, int capacity , String gameStatus, String hostUID, ArrayList<String> playerUIDList, boolean isExclusive, String name, String description) {
+    public Event(String event, Date timeOfGame, String locationTitle, int capacity , String gameStatus, String hostUID, ArrayList<String> participantUIDList, boolean isExclusive, String name, String description) {
         this.event = event;
         this.name = name;
         this.timeOfEvent = timeOfGame;
@@ -44,7 +44,7 @@ public class Event {
         this.capacity = capacity;
         this.eventStatus = gameStatus;
         this.hostUID = hostUID;
-        this.playerUIDList = playerUIDList;
+        this.participantUIDList = participantUIDList;
         this.isExclusive = isExclusive;
         this.description = description;
     }
@@ -106,12 +106,12 @@ public class Event {
         this.hostUID = hostUID;
     }
 
-    public List<String> getPlayerUIDList() {
-        return playerUIDList;
+    public List<String> getParticipantUIDList() {
+        return participantUIDList;
     }
 
-    public void setPlayerUIDList(ArrayList<String> playerUIDList) {
-        this.playerUIDList = playerUIDList;
+    public void setParticipantUIDList(ArrayList<String> participantUIDList) {
+        this.participantUIDList = participantUIDList;
     }
 
     public boolean getIsExclusive() {
@@ -148,7 +148,7 @@ public class Event {
                 && capacity == g.getCapacity()
                 && eventStatus.equals(g.getEventStatus())
                 && hostUID.equals(g.getHostUID())
-                && playerUIDList.equals(g.getPlayerUIDList())) { return true; }
+                && participantUIDList.equals(g.getParticipantUIDList())) { return true; }
         return false;
     }
 }
