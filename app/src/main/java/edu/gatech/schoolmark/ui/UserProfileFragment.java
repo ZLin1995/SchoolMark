@@ -88,13 +88,6 @@ public class UserProfileFragment extends Fragment implements View.OnClickListene
                     } else {
                         selectAffiliationGroup.check(R.id.userProfileStaffSelect);
                     }
-                } else {
-                    displayNameTextBox.setText("Enter Your Name Here");
-                    phoneNumberTextBox.setText("Enter Your Phone Number Here");
-                    ageTextBox.setText("Enter Your Age here");
-                    selectGenderGroup.check(R.id.userProfileMaleSelect);
-                    selectAffiliationGroup.check(R.id.userProfileStudentSelect);
-                    introductionTextBox.setText("Enter Your Self Introduction Here");
                 }
             }
 
