@@ -7,7 +7,7 @@
     android:layout_alignParentTop="true">
 
     <TextView
-        android:id="@+id/listEvent"
+        android:id="@+id/listEventName"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_alignEnd="@+id/listLocation"
@@ -18,10 +18,18 @@
         android:textStyle="bold" />
 
     <TextView
+        android:id="@+id/listEventType"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/listEventName"
+        android:text="TextView"
+        android:textStyle="bold" />
+
+    <TextView
         android:id="@+id/listLocation"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/listEvent"
+        android:layout_below="@+id/listEventType"
         android:text="TextView" />
 
     <TextView

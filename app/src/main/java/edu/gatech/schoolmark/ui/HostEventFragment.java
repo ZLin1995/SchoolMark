@@ -71,6 +71,7 @@ public class HostEventFragment extends Fragment implements AdapterView.OnItemSel
     private EditText eventDescription;
 
     private final String eventsListURL = "eventsList/";
+    private final String typesListURL = "typesList/";
     private final String locationListURL = "typesList/locations/";
 
     private boolean isHostStudent;
@@ -112,7 +113,7 @@ public class HostEventFragment extends Fragment implements AdapterView.OnItemSel
         eventDescription = root.findViewById(R.id.eventDescription);
 
         try {
-            currentRef = mDatabase.child(eventsListURL);
+            currentRef = mDatabase.child(typesListURL);
             currentRef.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {

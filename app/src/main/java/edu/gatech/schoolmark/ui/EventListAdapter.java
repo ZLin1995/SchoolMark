@@ -47,7 +47,8 @@ public class EventListAdapter extends ArrayAdapter<Event> {
         mAuth = FirebaseAuth.getInstance();
         LayoutInflater inflater = context.getLayoutInflater();
         View listViewItem = inflater.inflate(R.layout.join_event_list_layout, null, true);
-        TextView listSport = listViewItem.findViewById(R.id.listEvent);
+        TextView listEventName = listViewItem.findViewById(R.id.listEventName);
+        TextView listEventType = listViewItem.findViewById(R.id.listEventType);
         TextView listLocation = listViewItem.findViewById(R.id.listLocation);
         TextView listTime = listViewItem.findViewById(R.id.listTime);
         TextView listDate = listViewItem.findViewById(R.id.listDate);
@@ -57,10 +58,11 @@ public class EventListAdapter extends ArrayAdapter<Event> {
         final java.text.DateFormat dateFormat = android.text.format.DateFormat.getDateFormat(getContext());
         final java.text.DateFormat timeFormat = android.text.format.DateFormat.getTimeFormat(getContext());
         final Event event = eventList.get(position);
-        String gameKey = "";
+        String eventKey = "";
 
         cal.setTime(event.getTimeOfEvent());
-        listSport.setText(event.getEvent());
+        listEventName.setText(event.getEventName());
+        listEventType.setText(event.getEvent());
         listTime.setText(timeFormat.format(event.getTimeOfEvent()));
         listDate.setText(dateFormat.format(event.getTimeOfEvent()));
         listLocation.setText(event.getLocationTitle());
@@ -73,11 +75,11 @@ public class EventListAdapter extends ArrayAdapter<Event> {
             Event g = gameSnapshot.getValue(Event.class);
             if (g == null) { break; }
             if (g.equals(event)) {
-                gameKey = gameSnapshot.getKey();
+                eventKey = gameSnapshot.getKey();
             }
         }
 
-        final String game_key = gameKey;
+        final String event_key = eventKey;
 
         joinGame.setOnClickListener(new View.OnClickListener() {
              @Override
@@ -85,7 +87,7 @@ public class EventListAdapter extends ArrayAdapter<Event> {
                  List<String> editedList = event.getPlayerUIDList();
                  editedList.add(mAuth.getCurrentUser().getUid());
                  event.setPlayerUIDList((ArrayList<String>) editedList);
-                 mDatabase.child("eventsList").child(game_key).child("playerUIDList").setValue(editedList);
+                 mDatabase.child("eventsList").child(event_key).child("playerUIDList").setValue(editedList);
                  String toastText = "You have successfully joined the " + event.getEvent() + " event on " + event.getTimeOfEvent().toString().substring(0, 10);
                  Toast temp = Toast.makeText(context, toastText, Toast.LENGTH_LONG);
                  temp.setGravity(Gravity.CENTER,0,0);
@@ -97,16 +99,17 @@ public class EventListAdapter extends ArrayAdapter<Event> {
             @Override
             public void onClick(View view) {
                 Bundle bundle = new Bundle();
-                bundle.putString("sport", event.getEvent());
+                bundle.putString("eventName", event.getEventName());
+                bundle.putString("eventType", event.getEvent());
                 bundle.putString("location", event.getLocationTitle());
                 bundle.putString("time", timeFormat.format(event.getTimeOfEvent()));
                 bundle.putString("date", dateFormat.format(event.getTimeOfEvent()));
                 bundle.putString("hostID", event.getHostUID());
-                bundle.putString("gameID", game_key);
+                bundle.putString("eventID", event_key);
                 Fragment fragment = new EventDetailFragment();
                 fragment.setArguments(bundle);
                 FragmentManager fm = ((Activity)context).getFragmentManager();
-                fm.beginTransaction().replace(R.id.home_frame, fragment).commit();
+                fm.beginTransaction().replace(R.id.home_frame, fragment).addToBackStack( "tag" ).commit();
             }
         });
 

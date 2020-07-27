@@ -82,7 +82,7 @@ public class myEventListAdapter extends ArrayAdapter<Event> {
             }
         }
 
-        final String game_key = eventKey;
+        final String event_key = eventKey;
         quitEvent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -91,9 +91,9 @@ public class myEventListAdapter extends ArrayAdapter<Event> {
                 editedList.remove(user);
                 event.setPlayerUIDList((ArrayList<String>) editedList);
                 if (editedList.size() == 0 || event.getHostUID().equals(user)) {
-                    mDatabase.child("eventsList").child(game_key).removeValue();
+                    mDatabase.child("eventsList").child(event_key).removeValue();
                 } else {
-                    mDatabase.child("eventsList").child(game_key).child("playerUIDList").setValue(editedList);
+                    mDatabase.child("eventsList").child(event_key).child("playerUIDList").setValue(editedList);
                 }
                 String toastText = "You have successfully quited the " + event.getEvent() + " event on " + event.getTimeOfEvent().toString().substring(0, 10);
                 Toast temp = Toast.makeText(context, toastText, Toast.LENGTH_LONG);
@@ -112,7 +112,7 @@ public class myEventListAdapter extends ArrayAdapter<Event> {
                 bundle.putString("time", timeFormat.format(event.getTimeOfEvent()));
                 bundle.putString("date", dateFormat.format(event.getTimeOfEvent()));
                 bundle.putString("hostID", event.getHostUID());
-                bundle.putString("eventID", game_key);
+                bundle.putString("eventID", event_key);
                 Fragment fragment = new EventDetailFragment();
                 fragment.setArguments(bundle);
                 FragmentManager fm = ((Activity)context).getFragmentManager();

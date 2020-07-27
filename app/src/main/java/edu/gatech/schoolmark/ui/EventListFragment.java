@@ -282,7 +282,6 @@ public class EventListFragment extends Fragment implements AdapterView.OnItemSel
 
         }
 
-        // Refreshes the listView, without this call the filters don't change anything
         onStart();
 
     }
