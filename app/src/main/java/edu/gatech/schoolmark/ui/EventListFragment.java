@@ -43,7 +43,7 @@ public class EventListFragment extends Fragment implements AdapterView.OnItemSel
     private final String eventsListURL = "eventsList/";
 
 
-    private final String spSel = "Any Sport";
+    private final String spSel = "Any Event Type";
     private final String loSel = "Any Location";
 
     ListView listViewEvent;
