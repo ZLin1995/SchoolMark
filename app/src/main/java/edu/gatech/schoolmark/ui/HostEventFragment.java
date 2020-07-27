@@ -99,9 +99,6 @@ public class HostEventFragment extends Fragment implements AdapterView.OnItemSel
         hostButton.setOnClickListener(this);
         hostBackButton.setOnClickListener(this);
 
-        //timePicker = (TimePicker) findViewById(R.id.timePicker);
-        //datePicker = (DatePicker) findViewById(R.id.datePicker);
-
         eventsLocationsList = new ArrayList<>();
         eventsList = new ArrayList<>();
         playersList = new ArrayList<>();
@@ -186,23 +183,18 @@ public class HostEventFragment extends Fragment implements AdapterView.OnItemSel
     }
 
     private void attachListenerToSpinner() {
+         Log.i(TAG, "Current Size of sportsLocationList: " + eventsLocationsList.size());
+         Log.i(TAG, "Current Size of sportsList: " + eventsList.size());
+        // Populate the Sports dropdown with the Sports pulled from the database
         eventSpinner = (Spinner) root.findViewById(R.id.eventSpinner);
         ArrayAdapter<String> eventsAdapter = new ArrayAdapter<>(
                 getActivity(), android.R.layout.simple_spinner_item, eventsList);
         eventsAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         eventSpinner.setAdapter(eventsAdapter);
-
-        // Add an adapter for locations spinner, put garbage data for now
-        //eventsLocationsAdapter = new ArrayAdapter<>(
-        //        this, android.R.layout.simple_spinner_item, eventsLocationsList);
-
-        // adds listener so that on ItemSelected is called
         eventSpinner.setOnItemSelectedListener(this);
         locationSpinner.setOnItemSelectedListener(this);
 
     }
-
-
 
     public void hostNewGame(View view) {
         playersList.add(mAuth.getCurrentUser().getUid());
@@ -240,9 +232,7 @@ public class HostEventFragment extends Fragment implements AdapterView.OnItemSel
     }
 
 
-    // These two methods are required for OnItemSelectedListener
     public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
-        Log.i(TAG, "OnSelectedCalled");
         if (parent.getItemAtPosition(pos) instanceof String
                 && parent.getId() == eventSpinner.getId()) {
             String currentItem = (String) parent.getItemAtPosition(pos);
@@ -378,6 +368,62 @@ public class HostEventFragment extends Fragment implements AdapterView.OnItemSel
     public void showDatePicker(View v) {
         DialogFragment fragment = new DatePickerFragment();
         fragment.show(getFragmentManager(), "datePicker");
+    }
+
+
+    public void populateDatabase() {
+        List<String> listOfLocations = new ArrayList<>();
+        EventsLocations test;
+
+        //currentRef = mDatabase.child("sportsList");
+        mDatabase = FirebaseDatabase.getInstance().getReference();
+        currentRef = mDatabase.child("typesList/");
+
+
+        listOfLocations.add("Memorial Library");
+        listOfLocations.add("Student Center");
+        listOfLocations.add("Clough Commons");
+        listOfLocations.add("College of Computing");
+        listOfLocations.add("Rich Computer Center");
+        listOfLocations.add("Ferst Center");
+        listOfLocations.add("Centergy One");
+        listOfLocations.add("Global Learning Center");
+        test = new EventsLocations("StudySession", listOfLocations);
+        //currentRef.setValue(test);
+        currentRef.push().setValue(test);
+
+        // ===========
+
+
+        listOfLocations = new ArrayList<>();
+        listOfLocations.add("Memorial Library");
+        listOfLocations.add("Student Center");
+        listOfLocations.add("Clough Commons");
+        listOfLocations.add("College of Computing");
+        listOfLocations.add("Ferst Center");
+        listOfLocations.add("Centergy One");
+        listOfLocations.add("Global Learning Center");
+        listOfLocations.add("Crosland Tower");
+        listOfLocations.add("Holland Building");
+        listOfLocations.add("College of Business");
+        test = new EventsLocations("PublicSpeaking", listOfLocations);
+        currentRef.push().setValue(test);
+        // ===========
+
+
+        listOfLocations = new ArrayList<>();
+        listOfLocations.add("Tech Green");
+        listOfLocations.add("Student Center");
+        listOfLocations.add("Ferst Center");
+        listOfLocations.add("Boggs Building");
+        listOfLocations.add("Klaus Building");
+        listOfLocations.add("Whitaker Building");
+        listOfLocations.add("Centergy One");
+        listOfLocations.add("Global Learning Center");
+        test = new EventsLocations("ClubMeeting", listOfLocations);
+        currentRef.push().setValue(test);
+        // ===========
+
     }
 
 }
