@@ -31,7 +31,7 @@ public class ForgotPasswordActivity extends AppCompatActivity {
         String email = emailEdit.getText().toString();
 
         if (email.matches("") || !(email.substring(email.lastIndexOf('@') + 1).equals("gatech.edu"))) {
-            Toast.makeText(this, "Please enter your gatech email.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Please enter your valid gatech email.", Toast.LENGTH_SHORT).show();
         } else {
             mAuth.sendPasswordResetEmail(email)
                     .addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -39,7 +39,7 @@ public class ForgotPasswordActivity extends AppCompatActivity {
                         public void onComplete(@NonNull Task<Void> task) {
                             if (task.isSuccessful()) {
                                 Log.d("LOG:", "Email sent.");
-                                Toast.makeText(ForgotPasswordActivity.this, "Reset Email Sent! Check your Inbox!",
+                                Toast.makeText(ForgotPasswordActivity.this, "Reset link sent, please check your inbox.",
                                         Toast.LENGTH_SHORT).show();
                             }
                         }

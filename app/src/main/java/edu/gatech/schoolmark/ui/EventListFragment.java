@@ -25,9 +25,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import edu.gatech.schoolmark.R;
 import edu.gatech.schoolmark.model.Event;
@@ -41,8 +39,6 @@ public class EventListFragment extends Fragment implements AdapterView.OnItemSel
     private DatabaseReference mDatabase;
 
 
-    private static final String TAG = "Join Activity";
-
     private final String typesListURL = "typesList/";
     private final String eventsListURL = "eventsList/";
 
@@ -50,13 +46,9 @@ public class EventListFragment extends Fragment implements AdapterView.OnItemSel
     private final String spSel = "Any Sport";
     private final String loSel = "Any Location";
 
-    ExpandableListView filterBy;
     ListView listViewEvent;
     List<Event> eventList;
     String userUID;
-    Map<Integer, String> viewTohostUID;
-    private List<String> listDataHeader;
-    private HashMap<String, List<String>> listDataChild;
 
     Spinner eventSpinner;
     Spinner locationSpinner;
@@ -75,7 +67,6 @@ public class EventListFragment extends Fragment implements AdapterView.OnItemSel
     private View root;
 
     public EventListFragment() {
-        //required empty constructor
     }
 
     @Nullable
@@ -106,8 +97,6 @@ public class EventListFragment extends Fragment implements AdapterView.OnItemSel
                 fm.beginTransaction().replace(R.id.home_frame, fragment).addToBackStack( "tag" ).commit();
             }
         });
-
-        //populating the spinners
         spSelected = spSel;
         loSelected = loSel;
 
@@ -135,8 +124,6 @@ public class EventListFragment extends Fragment implements AdapterView.OnItemSel
             }
         });
 
-        // Add sports and locations to the spinners
-        // Get Sports List and Locations List from the Database
         try {
             currentRef = mDatabase.child(typesListURL);
             currentRef.addValueEventListener(new ValueEventListener() {
@@ -156,7 +143,6 @@ public class EventListFragment extends Fragment implements AdapterView.OnItemSel
 
                 @Override
                 public void onCancelled(DatabaseError databaseError) {
-                    Log.e(TAG, databaseError.getMessage());
                 }
             });
 
@@ -253,7 +239,6 @@ public class EventListFragment extends Fragment implements AdapterView.OnItemSel
             }
         }
 
-        // Refreshes the listView, without this call the filters don't change anything
         onStart();
 
     }

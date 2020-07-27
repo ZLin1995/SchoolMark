@@ -1,8 +1,6 @@
 package edu.gatech.schoolmark.ui;
 
-import android.app.Activity;
 import android.app.Fragment;
-import android.content.Intent;
 import android.location.Location;
 import android.location.LocationListener;
 import android.os.Bundle;
@@ -13,20 +11,16 @@ import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 
-import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import edu.gatech.schoolmark.model.User;
-import java.util.HashMap;
 
 import edu.gatech.schoolmark.R;
 
 public class EventDetailFragment extends Fragment implements  LocationListener{
-    private Activity context;
-    private FirebaseAuth mAuth;
     private DatabaseReference mDatabase;
     private View root;
     @Nullable
@@ -41,8 +35,6 @@ public class EventDetailFragment extends Fragment implements  LocationListener{
         TextView listDate = root.findViewById(R.id.detailDate);
         final TextView hostName = root.findViewById(R.id.detailHost);
         final TextView hostNumber = root.findViewById(R.id.detailHostNum);
-
-        mAuth = FirebaseAuth.getInstance();
         mDatabase = FirebaseDatabase.getInstance().getReference();
 
         Bundle args = getArguments();
@@ -73,9 +65,6 @@ public class EventDetailFragment extends Fragment implements  LocationListener{
 
             }
         });
-
-        DatabaseReference gamesRef = mDatabase.child("eventsList");
-        final HashMap<String, Integer> gameMap = new HashMap<>();
 
         return root;
     }

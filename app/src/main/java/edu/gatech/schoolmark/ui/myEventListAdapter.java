@@ -32,8 +32,6 @@ public class myEventListAdapter extends ArrayAdapter<Event> {
     private DatabaseReference currentRef;
     private DataSnapshot eventsList;
     private List<Event> eventList;
-    //private String gameKey;
-    //private Event game;
 
 
     public myEventListAdapter(Activity context, List<Event> eventList, DataSnapshot eventsList) {

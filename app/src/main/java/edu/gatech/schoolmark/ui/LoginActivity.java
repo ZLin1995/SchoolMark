@@ -21,8 +21,6 @@ import edu.gatech.schoolmark.R;
 public class LoginActivity extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
-    private FirebaseAuth.AuthStateListener mAuthListener;
-    private static final String TAG = "EmailPassword";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,10 +69,8 @@ public class LoginActivity extends AppCompatActivity {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             FirebaseUser user = mAuth.getCurrentUser();
-                            Log.d(TAG, "signInWithEmail:onComplete:" + task.isSuccessful());
                             if (!task.isSuccessful()) {
-                                Log.w(TAG, "signInWithEmail:failed", task.getException());
-                                Toast.makeText(LoginActivity.this, "Incorrect Email Address or Password entered!",
+                                Toast.makeText(LoginActivity.this, "Incorrect Email Address or Password!",
                                         Toast.LENGTH_SHORT).show();
                             } else if (user != null && user.isEmailVerified()) {
                                 Intent intent = new Intent(LoginActivity.this, MainActivity.class);
@@ -113,12 +109,11 @@ public class LoginActivity extends AppCompatActivity {
             public void onComplete(@NonNull Task task) {
                 if (task.isSuccessful()) {
                     Toast.makeText(LoginActivity.this,
-                            "Verification email sent to " + user.getEmail(),
+                            "Account verification email sent to " + user.getEmail(),
                             Toast.LENGTH_SHORT).show();
                 } else {
-                    Log.e(TAG, "sendEmailVerification", task.getException());
                     Toast.makeText(LoginActivity.this,
-                            "Failed to send verification email",
+                            "Failed to send account verification email",
                             Toast.LENGTH_SHORT).show();
                 }
             }

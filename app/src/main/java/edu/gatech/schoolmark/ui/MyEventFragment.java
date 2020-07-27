@@ -32,9 +32,7 @@ public class MyEventFragment extends Fragment { // AppCompatActivity
 
     ListView listViewGame;
     List<Event> eventList;
-    Event selectedEvent;
     String userUID;
-    Map<Integer, String> viewTohostUID;
 
     private View root;
 

@@ -30,10 +30,6 @@ import com.google.firebase.database.ValueEventListener;
 import edu.gatech.schoolmark.R;
 import edu.gatech.schoolmark.model.User;
 
-/**
- * Created by Altan on 9/7/2017.
- */
-
 public class UserProfileFragment extends Fragment implements View.OnClickListener {
 
     private FirebaseAuth mAuth;
@@ -41,7 +37,6 @@ public class UserProfileFragment extends Fragment implements View.OnClickListene
     private View root;
 
     public UserProfileFragment() {
-        //required empty constructor
     }
 
     @Nullable
@@ -59,7 +54,6 @@ public class UserProfileFragment extends Fragment implements View.OnClickListene
         mAuth = FirebaseAuth.getInstance();
         mDatabase = FirebaseDatabase.getInstance().getReference();
 
-        //Populate fields with data from the logged in user
         DatabaseReference userRef = mDatabase.child("userList").child(mAuth.getCurrentUser().getUid());
         userRef.addValueEventListener(new ValueEventListener() {
             @Override
@@ -120,8 +114,8 @@ public class UserProfileFragment extends Fragment implements View.OnClickListene
         RadioGroup selectAffiliationGroup = root.findViewById(R.id.userProfileAffiliation);
         EditText introductionTextBox = root.findViewById(R.id.personalIntroduction);
 
-        if(displayNameTextBox.getText().toString().length() > 15) {
-            Toast.makeText(getActivity(), "You can only have up to 15 characters in your name :(",
+        if(displayNameTextBox.getText().toString().length() > 20) {
+            Toast.makeText(getActivity(), "The maximum character length for name is 20",
                     Toast.LENGTH_LONG).show();
         } else {
             String displayName = displayNameTextBox.getText().toString();
@@ -148,7 +142,7 @@ public class UserProfileFragment extends Fragment implements View.OnClickListene
 
             userRef.setValue(currentUser);
 
-            Toast.makeText(getActivity(), "Your changes have been saved!",
+            Toast.makeText(getActivity(), "Your profile have been saved.",
                     Toast.LENGTH_SHORT).show();
             Fragment fragment = new EventListFragment();
             FragmentManager fm = getFragmentManager();
@@ -158,7 +152,7 @@ public class UserProfileFragment extends Fragment implements View.OnClickListene
     }
 
     public void profileOnBack(View view) {
-        Toast.makeText(getActivity(), "You exited without saving your changes.",
+        Toast.makeText(getActivity(), "Existed without saving the profile page.",
                 Toast.LENGTH_SHORT).show();
         Fragment fragment = new EventListFragment();
         FragmentManager fm = getFragmentManager();
@@ -173,7 +167,7 @@ public class UserProfileFragment extends Fragment implements View.OnClickListene
 
         builder = new AlertDialog.Builder(getActivity());
         builder.setTitle("Delete Account")
-                .setMessage("Are you sure you wanna leave us? :(")
+                .setMessage("Please verify you want to delete this account")
                 .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                         deleting();
@@ -184,7 +178,7 @@ public class UserProfileFragment extends Fragment implements View.OnClickListene
                 })
                 .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
-                        Toast.makeText(getActivity(), "We're glad you're staying :)",
+                        Toast.makeText(getActivity(), "You cancelled the action.",
                                 Toast.LENGTH_LONG).show();
                     }
                 })
@@ -204,7 +198,7 @@ public class UserProfileFragment extends Fragment implements View.OnClickListene
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
                         if (task.isSuccessful()) {
-                            Log.d("", "User account deleted.");
+                            Log.d("", "User account has been deleted. Thank you for using SchoolMark");
                         }
                     }
                 });

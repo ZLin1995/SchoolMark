@@ -22,8 +22,6 @@ import edu.gatech.schoolmark.R;
 public class RegisterActivity extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
-    private FirebaseAuth.AuthStateListener mAuthListener;
-    private static final String TAG = "EmailPassword";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,7 +29,6 @@ public class RegisterActivity extends AppCompatActivity {
         setContentView(R.layout.activity_register);
         mAuth = FirebaseAuth.getInstance();
 
-        // Append @gatech.edu to registration email
         EditText emailField = (EditText)findViewById(R.id.enterEmailRegister);
         emailField.setText("@gatech.edu");
     }
@@ -62,21 +59,19 @@ public class RegisterActivity extends AppCompatActivity {
         } else if (!(email.substring(email.lastIndexOf('@') + 1).equals("gatech.edu"))) {
             Toast.makeText(this, "You need to register with a valid GaTech email!", Toast.LENGTH_SHORT).show();
         } else if (password.length() < 6) {
-            Toast.makeText(this, "Your password must be at least 6 characters long!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "The minimum character length for password is 6.", Toast.LENGTH_SHORT).show();
         } else {
             mAuth.createUserWithEmailAndPassword(email, password)
                     .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
-                            Log.d(TAG, "createUserWithEmail:onComplete:" + task.isSuccessful());
                             if (task.isSuccessful()) {
-                                Log.d(TAG, "Successful registration");
                                 sendEmail();
                             } else {
                                 if (task.getException() instanceof FirebaseAuthUserCollisionException) {
-                                    Toast.makeText(RegisterActivity.this, "This email account is already registered!", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(RegisterActivity.this, "This email account is already registered, please login instead.", Toast.LENGTH_SHORT).show();
                                 }
-                                Toast.makeText(RegisterActivity.this, "Firebase Authentification failed"
+                                Toast.makeText(RegisterActivity.this, "Server Authentification failed"
                                         , Toast.LENGTH_SHORT).show();
                             }
 
@@ -91,9 +86,6 @@ public class RegisterActivity extends AppCompatActivity {
         finish();
     }
 
-    /**
-     * sends the email once a user is created
-     */
     private void sendEmail() {
         final FirebaseUser user = mAuth.getCurrentUser();
         if (user == null) { return; }
@@ -106,7 +98,6 @@ public class RegisterActivity extends AppCompatActivity {
                             Toast.LENGTH_SHORT).show();
 
                 } else {
-                    Log.e(TAG, "sendEmailVerification", task.getException());
                     Toast.makeText(RegisterActivity.this,
                             "Failed to send verification email",
                             Toast.LENGTH_SHORT).show();

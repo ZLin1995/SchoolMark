@@ -48,36 +48,28 @@ public class HostEventFragment extends Fragment implements AdapterView.OnItemSel
     private FirebaseAuth mAuth;
     private DatabaseReference mDatabase;
     private DatabaseReference currentRef;
-    private static final String TAG = "Event";
 
     private List<String> eventsList;
     private List<EventsLocations> eventsLocationsList;
-    private ArrayAdapter<String> eventsLocationsAdapter;
     private ArrayList<String> playersList;
 
-    private TimePicker timePicker;
-    private DatePicker datePicker;
     private Spinner locationSpinner;
     private Spinner eventSpinner;
     private String eventSelected;
     private String locationSelected;
     static java.util.Calendar cal = java.util.Calendar.getInstance();
-    private RatingBar intensity;
     private NumberPicker numberOfPlayers;
     private CheckBox checkBox;
     private EditText eventName;
     private EditText eventDescription;
 
-    private final String eventsListURL = "eventsList/";
     private final String typesListURL = "typesList/";
-    private final String locationListURL = "typesList/locations/";
 
     private boolean isHostStudent;
 
     private View root;
 
     public HostEventFragment() {
-        //required empty constructor
     }
 
     @Nullable
@@ -128,7 +120,6 @@ public class HostEventFragment extends Fragment implements AdapterView.OnItemSel
 
                 @Override
                 public void onCancelled(DatabaseError databaseError) {
-                    Log.e(TAG, databaseError.getMessage());
                 }
             });
 
@@ -159,7 +150,6 @@ public class HostEventFragment extends Fragment implements AdapterView.OnItemSel
             });
 
         } catch (NullPointerException ex) {
-            Log.e(TAG, "database reference retrieved was null");
             Fragment fragment = new EventListFragment();
             FragmentManager fm = getFragmentManager();
             fm.beginTransaction().replace(R.id.home_frame, fragment).commit();
@@ -175,16 +165,13 @@ public class HostEventFragment extends Fragment implements AdapterView.OnItemSel
         } else if (v.getId() == R.id.timePickButton) {
             showTimePicker(v);
         } else if (v.getId() == R.id.hostEventButton) {
-            hostNewGame(v);
+            hostNewEvent(v);
         } else if (v.getId() == R.id.hostEventBackButton) {
-            cancelGame(v);
+            cancelEvent(v);
         }
     }
 
     private void attachListenerToSpinner() {
-         Log.i(TAG, "Current Size of sportsLocationList: " + eventsLocationsList.size());
-         Log.i(TAG, "Current Size of sportsList: " + eventsList.size());
-        // Populate the Sports dropdown with the Sports pulled from the database
         eventSpinner = (Spinner) root.findViewById(R.id.eventSpinner);
         ArrayAdapter<String> eventsAdapter = new ArrayAdapter<>(
                 getActivity(), android.R.layout.simple_spinner_item, eventsList);
@@ -195,7 +182,7 @@ public class HostEventFragment extends Fragment implements AdapterView.OnItemSel
 
     }
 
-    public void hostNewGame(View view) {
+    public void hostNewEvent(View view) {
         playersList.add(mAuth.getCurrentUser().getUid());
         Event newGame = new Event();
         newGame.setParticipantUIDList(playersList);
@@ -216,7 +203,7 @@ public class HostEventFragment extends Fragment implements AdapterView.OnItemSel
         currentRef.push().setValue(newGame);
 
         Toast.makeText(getActivity(),
-                "Your game was hosted!",
+                "Your event was hosted successfully!",
                 Toast.LENGTH_SHORT).show();
 
         Fragment fragment = new EventListFragment();
@@ -224,7 +211,7 @@ public class HostEventFragment extends Fragment implements AdapterView.OnItemSel
         fm.beginTransaction().replace(R.id.home_frame, fragment).commit();
     }
 
-    public void cancelGame(View view) {
+    public void cancelEvent(View view) {
         Fragment fragment = new EventListFragment();
         FragmentManager fm = getFragmentManager();
         fm.beginTransaction().replace(R.id.home_frame, fragment).commit();
@@ -235,7 +222,6 @@ public class HostEventFragment extends Fragment implements AdapterView.OnItemSel
         if (parent.getItemAtPosition(pos) instanceof String
                 && parent.getId() == eventSpinner.getId()) {
             String currentItem = (String) parent.getItemAtPosition(pos);
-            Log.i(TAG, (String) parent.getItemAtPosition(pos));
             eventSelected = currentItem;
             for (EventsLocations s: eventsLocationsList) {
 
@@ -265,9 +251,6 @@ public class HostEventFragment extends Fragment implements AdapterView.OnItemSel
 
         @Override
         public Dialog onCreateDialog(Bundle savedInstanceState) {
-//            final java.util.Calendar c = java.util.Calendar.getInstance();
-//            int hour = c.get(java.util.Calendar.HOUR_OF_DAY);
-//            int minute = c.get(java.util.Calendar.MINUTE);
             int hour = cal.get(java.util.Calendar.HOUR_OF_DAY);
             int minute = cal.get(java.util.Calendar.MINUTE);
 
@@ -367,62 +350,6 @@ public class HostEventFragment extends Fragment implements AdapterView.OnItemSel
     public void showDatePicker(View v) {
         DialogFragment fragment = new DatePickerFragment();
         fragment.show(getFragmentManager(), "datePicker");
-    }
-
-
-    public void populateDatabase() {
-        List<String> listOfLocations = new ArrayList<>();
-        EventsLocations test;
-
-        //currentRef = mDatabase.child("sportsList");
-        mDatabase = FirebaseDatabase.getInstance().getReference();
-        currentRef = mDatabase.child("typesList/");
-
-
-        listOfLocations.add("Memorial Library");
-        listOfLocations.add("Student Center");
-        listOfLocations.add("Clough Commons");
-        listOfLocations.add("College of Computing");
-        listOfLocations.add("Rich Computer Center");
-        listOfLocations.add("Ferst Center");
-        listOfLocations.add("Centergy One");
-        listOfLocations.add("Global Learning Center");
-        test = new EventsLocations("StudySession", listOfLocations);
-        //currentRef.setValue(test);
-        currentRef.push().setValue(test);
-
-        // ===========
-
-
-        listOfLocations = new ArrayList<>();
-        listOfLocations.add("Memorial Library");
-        listOfLocations.add("Student Center");
-        listOfLocations.add("Clough Commons");
-        listOfLocations.add("College of Computing");
-        listOfLocations.add("Ferst Center");
-        listOfLocations.add("Centergy One");
-        listOfLocations.add("Global Learning Center");
-        listOfLocations.add("Crosland Tower");
-        listOfLocations.add("Holland Building");
-        listOfLocations.add("College of Business");
-        test = new EventsLocations("PublicSpeaking", listOfLocations);
-        currentRef.push().setValue(test);
-        // ===========
-
-
-        listOfLocations = new ArrayList<>();
-        listOfLocations.add("Tech Green");
-        listOfLocations.add("Student Center");
-        listOfLocations.add("Ferst Center");
-        listOfLocations.add("Boggs Building");
-        listOfLocations.add("Klaus Building");
-        listOfLocations.add("Whitaker Building");
-        listOfLocations.add("Centergy One");
-        listOfLocations.add("Global Learning Center");
-        test = new EventsLocations("ClubMeeting", listOfLocations);
-        currentRef.push().setValue(test);
-        // ===========
-
     }
 
 }
